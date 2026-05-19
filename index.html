@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashish Mathur — Engineering Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Backgrounds — subtle alternation */
+  --ivory:#faf8f4;
+  --cream:#f7f3ed;
+  --cream2:#f2ece0;
+  --cream3:#e9e0d0;
+  --cream-alt:#f4efe6; /* alternate section bg */
+
+  /* Text */
+  --charcoal:#1a1917;
+  --char2:#36332e;
+  --char3:#5a5650;
+  --char4:#928e86;
+
+  /* Accent — two copper tones + muted sand for secondary use */
+  --copper:#a8551a;        /* deeper, richer copper */
+  --copper2:#c96a22;       /* hover / lighter copper */
+  --sand:#c8a882;          /* secondary accent — pills, borders */
+  --sand-dim:rgba(200,168,130,0.18);
+  --copper-dim:rgba(168,85,26,0.1);
+  --copper-dim2:rgba(168,85,26,0.05);
+
+  /* Rules */
+  --rule:rgba(26,25,23,0.13);
+  --rule2:rgba(26,25,23,0.07);
+
+  /* Type */
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Playfair Display',serif;
+  --body:'Source Serif 4',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--ivory);color:var(--charcoal);font-family:var(--body);font-size:17px;line-height:1.75;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3rem;background:rgba(250,248,244,0.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);}
+.nav-logo{font-family:var(--mono);font-size:12px;color:var(--copper);letter-spacing:.1em;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:11px;color:var(--char3);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s,border-color .2s;border-bottom:1px solid transparent;padding-bottom:1px;}
+.nav-links a:hover,.nav-links a.active{color:var(--copper);border-bottom-color:var(--copper);}
+.nav-links a:hover{color:var(--copper);}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding:0 3rem;padding-top:80px;gap:4rem;align-items:center;border-bottom:1px solid var(--rule);position:relative;overflow:hidden;}
+.hero-bg-text{position:absolute;right:-.02em;top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:clamp(120px,18vw,220px);color:rgba(30,30,27,.04);line-height:1;pointer-events:none;user-select:none;white-space:nowrap;font-style:italic;}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;color:var(--copper);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;animation:fadeUp .7s ease both .1s;}
+.hero-eyebrow::before{content:'';display:block;width:2rem;height:1px;background:var(--copper);flex-shrink:0;}
+.hero-name{font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);line-height:1.05;color:var(--charcoal);margin-bottom:1.5rem;animation:fadeUp .7s ease both .2s;}
+.hero-name::after{content:'';display:block;width:4rem;height:2px;background:var(--copper);margin-top:1.2rem;opacity:.7;}
+.hero-name em{font-style:italic;color:var(--copper);}
+.hero-summary{font-size:15px;color:var(--char3);line-height:1.8;margin-bottom:2.5rem;max-width:480px;animation:fadeUp .7s ease both .35s;}
+.hero-actions{display:flex;align-items:center;gap:1.5rem;animation:fadeUp .7s ease both .5s;}
+.btn-primary{font-family:var(--mono);font-size:11px;color:var(--ivory);background:var(--charcoal);text-decoration:none;padding:.85rem 2rem;letter-spacing:.1em;text-transform:uppercase;transition:all .2s;border:1px solid var(--charcoal);}
+.btn-primary:hover{background:var(--copper);border-color:var(--copper);}
+.btn-ghost{font-family:var(--mono);font-size:11px;color:var(--char2);text-decoration:none;padding:.85rem 1.5rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--rule);transition:all .2s;}
+.btn-ghost:hover{border-color:var(--copper);color:var(--copper);}
+.hero-right{display:flex;flex-direction:column;gap:0;animation:fadeUp .7s ease both .4s;}
+.hero-stat{padding:1.5rem 0;border-top:1px solid var(--rule);transition:padding-left .25s;}
+.hero-stat:hover{padding-left:.75rem;}
+.hero-stat:last-child{border-bottom:1px solid var(--rule);}
+.hero-stat-num{font-family:var(--serif);font-size:2.8rem;color:var(--charcoal);line-height:1;margin-bottom:.35rem;letter-spacing:-.02em;}
+.hero-stat-num .unit{color:var(--copper);font-size:1.8rem;}
+.hero-stat-num span{color:var(--copper);}
+.hero-stat-label{font-family:var(--mono);font-size:11px;color:var(--char4);letter-spacing:.05em;line-height:1.5;}
+.hero-location{font-family:var(--mono);font-size:11px;color:var(--char4);letter-spacing:.05em;margin-top:2rem;animation:fadeUp .7s ease both .6s;}
+
+section{padding:6rem 3rem;border-bottom:1px solid var(--rule);}
+section.alt{background:var(--cream-alt);}
+.section-label{font-family:var(--mono);font-size:10px;color:var(--copper);letter-spacing:.2em;text-transform:uppercase;margin-bottom:3.5rem;display:flex;align-items:center;gap:1rem;}
+.section-label::after{content:'';flex:1;height:1px;max-width:60px;background:var(--rule);}
+.section-heading{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);color:var(--charcoal);line-height:1.2;margin-bottom:1rem;}
+.section-heading em{font-style:italic;color:var(--copper);}
+
+.narrative{background:var(--cream2);border-left:3px solid var(--copper);padding:2rem 2.5rem;margin-bottom:4rem;max-width:860px;}
+.narrative p{font-size:15px;color:var(--char2);line-height:1.85;font-style:italic;}
+.narrative p+p{margin-top:.75rem;}
+.narrative cite{display:block;font-family:var(--mono);font-size:10px;color:var(--copper);letter-spacing:.1em;margin-top:1rem;font-style:normal;}
+
+.timeline{position:relative;}
+.timeline::before{content:'';position:absolute;left:190px;top:0;bottom:0;width:1px;background:var(--rule);}
+.tl-item{display:grid;grid-template-columns:190px 1fr;gap:0 3rem;padding:3rem 0;border-top:1px solid var(--rule2);position:relative;}
+.tl-item:last-child{border-bottom:1px solid var(--rule2);}
+.tl-dot{position:absolute;left:186px;top:3.5rem;width:8px;height:8px;border-radius:50%;background:var(--copper);border:2px solid var(--ivory);box-shadow:0 0 0 1px var(--copper);}
+.tl-left{text-align:right;padding-right:2rem;padding-top:.25rem;}
+.tl-date{font-family:var(--mono);font-size:11px;color:var(--char4);letter-spacing:.05em;line-height:1.7;}
+.tl-co{font-family:var(--mono);font-size:10px;color:var(--copper);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem;}
+.tl-role{font-family:var(--serif);font-size:1.5rem;color:var(--charcoal);line-height:1.2;margin-bottom:.4rem;}
+.tl-client{font-family:var(--mono);font-size:11px;color:var(--char4);letter-spacing:.04em;margin-bottom:1.25rem;}
+.tl-section-head{font-family:var(--mono);font-size:10px;color:var(--sand);letter-spacing:.12em;text-transform:uppercase;margin:1.5rem 0 .6rem;font-weight:500;border-left:2px solid var(--sand);padding-left:.6rem;}
+.tl-section-head:first-of-type{margin-top:0;}
+.tl-bullets{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:.75rem;}
+.tl-bullets li{font-size:14px;color:var(--char3);padding-left:1.25rem;position:relative;line-height:1.6;}
+.tl-bullets li::before{content:'—';position:absolute;left:0;color:var(--copper);font-size:12px;}
+.tl-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.tag{font-family:var(--mono);font-size:10px;color:var(--char4);border:1px solid var(--rule);padding:.2rem .6rem;letter-spacing:.04em;background:transparent;transition:border-color .2s,color .2s;}
+.tag:hover{border-color:var(--copper);color:var(--copper);}
+
+.featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule2);border:1px solid var(--rule2);}
+.feat-card{background:var(--ivory);padding:2.5rem;cursor:pointer;transition:background .25s,box-shadow .25s,transform .25s;position:relative;overflow:hidden;}
+.feat-card:hover{background:var(--cream2);box-shadow:0 8px 32px rgba(26,25,23,.08);transform:translateY(-2px);}
+.feat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.feat-card:hover::after{transform:scaleX(1);}
+.feat-num{font-family:var(--mono);font-size:10px;color:var(--char4);letter-spacing:.1em;margin-bottom:1.5rem;}
+.feat-title{font-family:var(--serif);font-size:1.6rem;color:var(--charcoal);line-height:1.2;margin-bottom:.75rem;}
+.feat-domain{font-family:var(--mono);font-size:10px;color:var(--copper);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;}
+.feat-desc{font-size:14px;color:var(--char3);line-height:1.7;margin-bottom:1.5rem;}
+.feat-highlights{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem;}
+.feat-pill{font-family:var(--mono);font-size:10px;color:var(--char3);background:var(--sand-dim);border:1px solid rgba(200,168,130,.35);padding:.25rem .65rem;letter-spacing:.04em;}
+.feat-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1.25rem;border-top:1px solid var(--rule);font-family:var(--mono);font-size:10px;color:var(--char4);}
+.feat-cta{color:var(--copper);transition:letter-spacing .2s;}
+.feat-card:hover .feat-cta{letter-spacing:.08em;}
+
+.all-projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule2);border:1px solid var(--rule2);margin-top:3rem;}
+.proj-card{background:var(--ivory);padding:2rem;cursor:pointer;transition:background .2s;}
+.proj-card:hover{background:var(--cream2);box-shadow:0 4px 20px rgba(26,25,23,.07);}
+.proj-card:hover .proj-name{color:var(--copper);}
+.proj-num{font-family:var(--mono);font-size:10px;color:var(--char4);letter-spacing:.1em;margin-bottom:1rem;}
+.proj-name{font-family:var(--serif);font-size:1.2rem;color:var(--charcoal);line-height:1.25;margin-bottom:.4rem;transition:color .2s;}
+.proj-domain{font-family:var(--mono);font-size:10px;color:var(--copper);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem;}
+.proj-role-period{font-family:var(--mono);font-size:10px;color:var(--char4);letter-spacing:.04em;line-height:1.6;margin-bottom:.75rem;}
+.proj-desc{font-size:13px;color:var(--char3);line-height:1.65;margin-bottom:1rem;}
+.proj-award{font-family:var(--mono);font-size:10px;color:var(--copper);border-top:1px solid var(--rule);padding-top:.75rem;margin-top:.75rem;}
+
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule2);border:1px solid var(--rule2);}
+.skill-group{background:var(--ivory);padding:2rem;}
+.skill-group-title{font-family:var(--mono);font-size:10px;color:var(--char3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:2px solid var(--copper);}
+.skill-list{font-family:var(--mono);font-size:12px;color:var(--char3);line-height:2.1;letter-spacing:.02em;}
+
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--rule2);border:1px solid var(--rule2);}
+.article-card{background:var(--ivory);padding:2rem;cursor:pointer;transition:background .2s;display:flex;flex-direction:column;}
+.article-card:hover{background:var(--cream2);box-shadow:0 4px 20px rgba(26,25,23,.07);}
+.article-card:hover .article-title{color:var(--copper);}
+.article-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;font-family:var(--mono);font-size:10px;letter-spacing:.08em;}
+.atype{color:var(--copper);text-transform:uppercase;}
+.atype.case{color:var(--sand);}
+.atype.prev{color:var(--char4);}
+.atime{color:var(--char4);}
+.article-title{font-family:var(--serif);font-size:1.15rem;color:var(--charcoal);line-height:1.3;margin-bottom:.75rem;transition:color .2s;flex:1;}
+.article-blurb{font-size:13px;color:var(--char3);line-height:1.65;margin-bottom:1rem;}
+.article-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;}
+.article-footer{display:flex;justify-content:space-between;align-items:center;padding-top:.75rem;border-top:1px solid var(--rule);font-family:var(--mono);font-size:10px;margin-top:auto;}
+.article-cat{color:var(--char4);}
+.article-read{color:var(--copper);}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(30,30,27,.72);backdrop-filter:blur(6px);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:2rem;overflow-y:auto;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--ivory);border:1px solid var(--rule);max-width:780px;width:100%;margin:auto;padding:3.5rem;position:relative;animation:modalIn .35s ease;}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.modal-close{position:absolute;top:1.5rem;right:1.5rem;background:transparent;border:1px solid var(--rule);color:var(--char3);width:36px;height:36px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:var(--mono);}
+.modal-close:hover{border-color:var(--copper);color:var(--copper);}
+.modal-kicker{font-family:var(--mono);font-size:10px;color:var(--copper);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;}
+.modal-title{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.2;color:var(--charcoal);margin-bottom:.75rem;}
+.modal-sub{font-family:var(--mono);font-size:11px;color:var(--char4);letter-spacing:.04em;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--rule);}
+.modal-body{font-size:15px;line-height:1.85;color:var(--char2);font-family:var(--body);}
+.modal-body h3{font-family:var(--mono);font-size:10px;color:var(--copper);letter-spacing:.15em;text-transform:uppercase;margin:2.5rem 0 1rem;font-weight:500;}
+.modal-body h3:first-child{margin-top:0;}
+.modal-body p{margin-bottom:1.25rem;}
+.modal-body ul{padding-left:1.5rem;margin-bottom:1.25rem;}
+.modal-body li{margin-bottom:.5rem;}
+.modal-body strong{color:var(--charcoal);font-weight:600;}
+.modal-body code{font-family:var(--mono);font-size:13px;background:var(--cream3);color:var(--copper);padding:.15rem .4rem;border:1px solid var(--rule);}
+.modal-body blockquote{border-left:3px solid var(--copper);padding:.75rem 0 .75rem 1.5rem;margin:2rem 0;font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--charcoal);line-height:1.5;background:var(--cream2);}
+.modal-body .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:2rem 0;}
+.modal-body .cc{background:var(--cream2);padding:1.25rem;text-align:center;}
+.modal-body .cn{font-family:var(--serif);font-size:1.75rem;color:var(--copper);line-height:1;margin-bottom:.25rem;display:block;}
+.modal-body .cl{font-family:var(--mono);font-size:10px;color:var(--char3);letter-spacing:.04em;}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;}
+.about-copy p{font-size:15px;color:var(--char3);line-height:1.85;margin-bottom:1.25rem;}
+.edu-item{padding:1.5rem 0;border-top:1px solid var(--rule);}
+.edu-item:last-child{border-bottom:1px solid var(--rule);}
+.edu-degree{font-family:var(--serif);font-size:1.1rem;color:var(--charcoal);margin-bottom:.3rem;}
+.edu-inst{font-family:var(--mono);font-size:11px;color:var(--char3);letter-spacing:.04em;}
+.edu-year{font-family:var(--mono);font-size:11px;color:var(--char4);margin-top:.2rem;letter-spacing:.04em;}
+
+.contact-wrap{max-width:680px;}
+.contact-head{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.5rem);line-height:1.1;color:var(--charcoal);margin-bottom:1rem;}
+.contact-head em{font-style:italic;color:var(--copper);}
+.contact-sub{font-size:15px;color:var(--char3);margin-bottom:2.5rem;line-height:1.7;}
+.contact-links{display:flex;flex-wrap:wrap;gap:1rem;}
+.contact-link{font-family:var(--mono);font-size:11px;color:var(--char2);text-decoration:none;padding:.8rem 1.5rem;border:1px solid var(--rule);display:flex;align-items:center;gap:.5rem;letter-spacing:.06em;transition:all .2s;}
+.contact-link:hover{border-color:var(--copper);color:var(--copper);background:var(--copper-dim);}
+.contact-link svg{width:14px;height:14px;flex-shrink:0;}
+.privacy-note{margin-top:2rem;font-family:var(--mono);font-size:10px;color:var(--char4);letter-spacing:.04em;line-height:1.7;padding-top:1.5rem;border-top:1px solid var(--rule);}
+
+footer{padding:1.75rem 3rem;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;background:var(--cream2);}
+footer p{font-family:var(--mono);font-size:10px;color:var(--char4);letter-spacing:.06em;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+@media(max-width:960px){
+  nav{padding:1rem 1.5rem;}.nav-links{gap:1.2rem;}
+  .hero{grid-template-columns:1fr;padding:1.5rem;padding-top:80px;min-height:auto;padding-bottom:4rem;}
+  .hero-right{display:none;}
+  section{padding:4rem 1.5rem;}
+  .timeline::before{display:none;}.tl-item{grid-template-columns:1fr;gap:.5rem;padding:2rem 0;}.tl-dot{display:none;}.tl-left{text-align:left;padding-right:0;}
+  .featured-grid,.all-projects-grid,.skills-grid,.articles-grid{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;gap:3rem;}
+  footer{flex-direction:column;gap:.5rem;text-align:center;padding:1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">AM · Portfolio</span>
+  <ul class="nav-links">
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg-text">Mathur</div>
+  <div class="hero-left">
+    <p class="hero-eyebrow">Engineering Manager &amp; Software Architect</p>
+    <h1 class="hero-name">Ashish<br><em>Mathur</em></h1>
+    <p class="hero-summary">Over a decade building healthcare platforms that matter — from writing reconciliation algorithms to leading distributed systems at national oncology scale. Specialist in cloud-native architecture, engineering leadership, and AI-assisted engineering.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="https://linkedin.com/in/ashish-mathur-tech" class="btn-ghost" target="_blank">LinkedIn ↗</a>
+    </div>
+    <p class="hero-location">Washington, DC Metro · H1-B Transfer Ready</p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat"><div class="hero-stat-num">11<span>+</span></div><div class="hero-stat-label">Years building enterprise<br>healthcare platforms</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">10<span>+</span></div><div class="hero-stat-label">Engineers led across<br>30+ microservices</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-label">Production AI agents<br>shipped in 2024–25</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">9</div><div class="hero-stat-label">Products &amp; platforms<br>built or led</div></div>
+  </div>
+</header>
+
+<section id="journey">
+  <p class="section-label">Career Journey</p>
+  <div class="narrative reveal">
+    <p>The throughline across eleven years is this: every role built directly on the last one. The reconciliation algorithms written in Java 7 at Tekizma India sharpened the instinct for data consistency that later drove the Kafka/CDC architecture at the oncology platform. The NLP research and Drools rule engine work were precursors to the GenAI agents shipped a decade later. The batch-processing frameworks built for the State Health Insurance Marketplace — handling large-scale eligibility renewals — informed the multi-threaded thinking behind Databricks clinical pipelines.</p>
+    <p>The career arc is: <strong>individual contributor → product architect → consulting lead → engineering manager</strong> — each transition deliberate, each domain deepening a core specialisation in healthcare systems at scale.</p>
+    <cite>— A note on the progression</cite>
+  </div>
+
+  <div class="timeline">
+
+    <!-- ROLE 1: EM at Fortune 10 Oncology -->
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-left">
+        <div class="tl-date">May 2022<br>— Present</div>
+        <div class="tl-co">Fortune 10 Oncology<br>Company · via Tekizma</div>
+      </div>
+      <div class="tl-right">
+        <h3 class="tl-role">Engineering Manager &amp; Software Architect</h3>
+        <p class="tl-client">Platform &amp; Shared Services · National-Scale Oncology EHR</p>
+
+        <p class="tl-section-head">Team &amp; Delivery</p>
+        <ul class="tl-bullets">
+          <li>Lead 10+ engineers within the Platform &amp; Shared Services organisation, owning 30+ microservices plus a large legacy oncology application; shared platform adopted by 7–8 product teams supporting oncology practices across the U.S. at national scale.</li>
+          <li>Hire, mentor, and grow engineers at all levels; established design-review, on-call rotation, blameless post-mortem, and incident-learning processes that became org-wide standards.</li>
+          <li>Drive engineering execution across 4 concurrent product lines on critical-path schedules with 90%+ sprint commitment adherence on 2-week SAFe cycles.</li>
+          <li>Serve as primary point of contact for platform and security work across the engineering organisation; present ideas, technical strategy, and innovations to engineering leadership.</li>
+          <li>Participate in Major Incident Management (MIM) war rooms for critical production incidents — driving rapid containment, stakeholder communication, and RCA closure.</li>
+        </ul>
+
+        <p class="tl-section-head">Platform &amp; Architecture</p>
+        <ul class="tl-bullets">
+          <li>Replaced imperative Jenkins pipelines with ArgoCD declarative GitOps + Helm on the internal build platform — achieving ~30% improvement in release predictability, drift detection, environment promotion without manual gates, and full audit traceability; eliminated an entire class of deployment-drift incidents.</li>
+          <li>Designed near-real-time event streaming using Confluent Cloud Kafka + Debezium + Oracle XStream — selected CDC over dual-write to eliminate source-level consistency bugs; chose XStream over LogMiner for sub-second latency across PostgreSQL, Oracle, and MongoDB.</li>
+          <li>Databricks pipelines process thousands of clinical documents per hour with Azure Storage staging for analytics and interoperability workloads.</li>
+          <li>Architected Pub/Sub, Practice Extraction, and Practice Denormalization pipelines on Kubernetes using ConfigMaps and Nginx script injection; used Kogito Rule Engine for clinical workflow automation.</li>
+          <li>Completed phased Java LTS upgrade (17 → 21), Spring Boot and WildFly/Hibernate upgrades, and sticky-session removal for stateless horizontal scale backed by Azure Cache for Redis — all feature-flag gated for controlled rollout with Dynatrace observability.</li>
+          <li>Hardened production posture with Istio service mesh (mTLS) and enterprise WAF; standardised SDLC on GitLab; established commons auth-library used across 20–30 services.</li>
+          <li>Drove meaningful cloud cost savings through rightsizing, autoscaling, and FinOps practices; established continuous p99 latency and throughput monitoring across all Kubernetes workloads.</li>
+        </ul>
+
+        <p class="tl-section-head">Security &amp; Compliance</p>
+        <ul class="tl-bullets">
+          <li>Lead primary point of contact partnering with BISO on critical security risk; established org-wide DevSecOps standards across hundreds of GitHub repos including token-introspection / auth-module commons library, Maven SBOM gating covering 40–60 microservices, and NPM security gating in CI/CD.</li>
+          <li>Led an AI-assisted AppSec remediation sprint clearing 50%+ of critical security findings across three product lines in a single week — now a repeatable, cross-team playbook; also led supply-chain vulnerability response across the engineering org.</li>
+          <li>Automated security audit workflows, Spec-Driven Development (SDD) enforcement, and common security patterns via AI agents across all engineering teams.</li>
+        </ul>
+
+        <p class="tl-section-head">GenAI &amp; Innovation</p>
+        <ul class="tl-bullets">
+          <li>Built and operationalised 4 production AI agents embedded across all engineering teams: GitHub Automation Agent (scheduled security audits, SBOM gating, remediation PR generation), Copilot Studio / Power Automate conversational bot (RAG-based internal Q&amp;A in MS Teams), LLM-assisted code review (high-confidence issue flagging), and Databricks CCDA clinical document pipeline (built and shipped in under 2 weeks at the company Hackathon).</li>
+          <li>All agents operate as scheduled trigger-based automation requiring zero manual intervention; AI fluency is now a team-wide baseline across the engineering organisation.</li>
+        </ul>
+
+        <p class="tl-section-head">Product Delivery</p>
+        <ul class="tl-bullets">
+          <li>Delivered FHIR R4 REST endpoints and USCDI v3 compliance for the clinical history microservice on schedule despite regulatory complexity; completed 100% OKTA authentication rollout across all practices (rescued from stalled status).</li>
+          <li>Established the Design Systems shared UI platform; implemented patient-portal real-time features using Azure Communication Services; led e-Registration, e-Scheduling, e-Messaging, and Health Records module delivery.</li>
+          <li>Integrated FullStory analytics for user behaviour analysis and Stonly in-product help tooling, reducing support ticket volume for common workflows; led Smart API Portal load-reduction via Nginx ConfigMap injection at deploy time.</li>
+        </ul>
+
+        <div class="tl-tags">
+          <span class="tag">Kubernetes · Helm · ArgoCD</span><span class="tag">Istio · mTLS</span>
+          <span class="tag">Kafka · Debezium · CDC</span><span class="tag">Azure · AWS</span>
+          <span class="tag">Databricks</span><span class="tag">Spring Boot · Java 21</span>
+          <span class="tag">FHIR R4 · USCDI v3</span><span class="tag">Kogito</span>
+          <span class="tag">GenAI · Copilot Studio</span><span class="tag">GitLab · Build Piper</span>
+          <span class="tag">Dynatrace</span><span class="tag">OKTA · OAuth2</span>
+          <span class="tag">DevSecOps · SBOM</span><span class="tag">SAFe · MIM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROLE 2: Tech Lead at Fortune 10 Health Insurance -->
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-left">
+        <div class="tl-date">Sep 2019<br>— May 2022</div>
+        <div class="tl-co">Fortune 10 Health Insurance<br>Company · via Tekizma</div>
+      </div>
+      <div class="tl-right">
+        <h3 class="tl-role">Tech Lead / Senior Engineer</h3>
+        <p class="tl-client">State Health Insurance Marketplace · Individual, Assister &amp; Agent Portals</p>
+
+        <p class="tl-section-head">Core Platform Work</p>
+        <ul class="tl-bullets">
+          <li>Engineered eligibility determination, enrollment lifecycle (add/cancel/edit), and plan-management services for a state insurance exchange serving 1M+ eligibility renewals; covered Individual, Assister, and Agent portal flavors.</li>
+          <li>Built EDI-834 trading-partner integrations for enrollment and change events, auto-enrollment flows, effectuation web services, and Standalone Dental module; implemented IRS response handling for income verification and premium tax credit adjustment.</li>
+          <li>Designed and built the multithreaded batch framework for notices generation — renewals, Medicaid notices, RFI notices, and approval notices — with configurable concurrency, record-level checkpointing, and a replay API enabling re-execution of any batch subset without side effects.</li>
+          <li>Developed Shopping Group Classification and Plan Quotes based on Rating Areas, Providers, and Facilities; implemented income modules (One Time Income, IRS response integration).</li>
+        </ul>
+
+        <p class="tl-section-head">Platform Quality &amp; Operations</p>
+        <ul class="tl-bullets">
+          <li>Led performance diagnosis and optimisation across the Individual Portal using JProfiler (N+1 query and unindexed join identification) and Dynatrace (production validation); eliminated the key bottlenecks causing load-related degradation.</li>
+          <li>Delivered CMS audit-log features for the Agent Portal including Eligibility Audit Log &amp; Comparison module; built System Operational Reporting Framework and Balance &amp; Control reporting.</li>
+          <li>Led large-scale data correction, migration, and production support work across all three portal types; responsible for front-end work in the MEAN stack (MongoDB, Express, Angular 5, Node.js) alongside the Java backend.</li>
+        </ul>
+
+        <div class="tl-tags">
+          <span class="tag">Java 7/8</span><span class="tag">Spring MVC · Spring Batch</span>
+          <span class="tag">EDI-834 · X12</span><span class="tag">Oracle DB · MongoDB</span>
+          <span class="tag">Angular · Node.js</span><span class="tag">Dynatrace · JProfiler</span>
+          <span class="tag">BIRT Reporting</span><span class="tag">Hibernate</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROLE 3: Tekizma India — Senior Developer → Architect -->
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-left">
+        <div class="tl-date">Jul 2015<br>— Aug 2019</div>
+        <div class="tl-co">Tekizma India<br>Solutions Pvt. Ltd.</div>
+      </div>
+      <div class="tl-right">
+        <h3 class="tl-role">Senior Developer → Software Architect</h3>
+        <p class="tl-client">Healthcare &amp; Insurance Products · Internal + Client Engagements</p>
+
+        <p class="tl-section-head">Tekizma-Recon — Reconciliation Platform (2015–2019)</p>
+        <ul class="tl-bullets">
+          <li>Architected and led the flagship data-reconciliation product from the ground up — responsible for end-to-end product design, algorithm development, offshore team management, and client delivery across multiple years.</li>
+          <li>Designed the core reconciliation algorithm covering four phases: Identification (keyed bucketing for scalable pairwise comparison), Analysis (Drools rule engine for root-cause classification), Resolution (auto-apply or proposed corrections), and Correction (source-system write-back).</li>
+          <li>Integrated AWS Lambda for scheduled reconciliation jobs, Cognito for authentication, S3 for large data export staging, and Amazon Lex for a conversational dashboard interface; made the product HIPAA-compliant via remote DB connectivity patterns keeping PHI off the application tier.</li>
+          <li>Implemented Aspect-Oriented Programming (AOP) for licensing enforcement, audit logging, and security cross-cutting concerns — received Architect Appreciation Award for this integration; wrote X12/835 healthcare exchange parsers for payer data reconciliation.</li>
+          <li>Received external client appreciation for Google Charts-based reporting dashboard integration.</li>
+        </ul>
+
+        <p class="tl-section-head">Duplicate Defense — Record Matching Product (2016)</p>
+        <ul class="tl-bullets">
+          <li>Responsible for integration design between Duplicate Defense and Tekizma-Recon; developed the probabilistic duplicate-detection algorithm (probability-scored matching within and across databases) and DB schema; managed the reporting module end-to-end.</li>
+        </ul>
+
+        <p class="tl-section-head">Tekizma-NLP — AI Research Tool (Jan–Mar 2017)</p>
+        <ul class="tl-bullets">
+          <li>Led design and delivery of a multi-engine NLP comparison tool benchmarking Amazon Lex, IBM Watson, Microsoft LUIS, Google API.ai, Stanford NLP, WIT, and Open NLP on travel query interpretation; developed the normalisation algorithm mapping disparate vendor entity schemas to a canonical intent/entity model.</li>
+        </ul>
+
+        <p class="tl-section-head">9zest — Healthcare Consulting Engagement (Feb–Aug 2017)</p>
+        <ul class="tl-bullets">
+          <li>Engaged as Senior Consultant for a Parkinson's and stroke rehabilitation healthcare startup; designed and delivered a normalised cross-platform subscription framework abstracting iOS (App Store), Android (Play Store), and Web payment APIs behind a unified subscription model; managed overall delivery across all three platforms.</li>
+        </ul>
+
+        <p class="tl-section-head">State Health Insurance Exchange — Backend (2017–2019)</p>
+        <ul class="tl-bullets">
+          <li>Delivered backend services for the state health insurance exchange platform; full-stack MEAN implementation (MongoDB, Express, Angular, Node.js) alongside Java services for the Assister and Agent portals; data correction, migration, and performance support.</li>
+        </ul>
+
+        <div class="tl-tags">
+          <span class="tag">Java 7/8</span><span class="tag">Spring MVC · Hibernate</span>
+          <span class="tag">AWS Lambda · Cognito · S3 · Lex</span>
+          <span class="tag">Drools · AOP</span><span class="tag">X12/835 Parsers</span>
+          <span class="tag">Python · scikit-learn</span>
+          <span class="tag">NLP · IBM Watson · Stanford NLP</span>
+          <span class="tag">Angular · Node.js · Ionic</span>
+          <span class="tag">MongoDB · SQL</span><span class="tag">Google Charts API</span>
+          <span class="tag">HIPAA · Spring Security</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROLE 4: Cognizant -->
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-left">
+        <div class="tl-date">Jul 2014<br>— Jul 2015</div>
+        <div class="tl-co">Cognizant Technology<br>Solutions</div>
+      </div>
+      <div class="tl-right">
+        <h3 class="tl-role">Developer / Team Lead</h3>
+        <p class="tl-client">Life Sciences · Cognizant Technology Solutions</p>
+
+        <p class="tl-section-head">EOS Digitise Project (Feb 2015 – Jul 2015)</p>
+        <ul class="tl-bullets">
+          <li>Deployed by Cognizant as an independent developer resource on a global life-sciences engagement; responsible for offshore development and providing resolutions across multiple vendor applications including OpenText, ConceptShare, BP Logix, and Bugzilla.</li>
+          <li>Full-stack development across Java, PHP, .NET, and SQL Server; SOAP UI and REST client integrations; HTML/HTML5, JavaScript, and jQuery frontend work.</li>
+          <li>Received "Pat on the Back" external client award (June 2015) and "Energiser" external client award (April 2015) for consistent delivery quality and initiative.</li>
+        </ul>
+
+        <p class="tl-section-head">Content Management Portal (Nov 2014 – Feb 2015)</p>
+        <ul class="tl-bullets">
+          <li>Trained in PHP-Drupal technology stack; developed and managed content for a life-sciences client portal using Oracle DB, Drupal 6/7, HTML/HTML5, JavaScript, and jQuery.</li>
+        </ul>
+
+        <p class="tl-section-head">Bus Ticket Reservation System — Team Lead (Jul–Nov 2014)</p>
+        <ul class="tl-bullets">
+          <li>Led a trainee cohort as Team Lead; designed and built a Bus Ticket Reservation System as both a Windows and Web application using ASP.NET, C#, Microsoft SQL Server, and Visual Studio — first formal leadership role.</li>
+        </ul>
+
+        <div class="tl-tags">
+          <span class="tag">Java</span><span class="tag">PHP · Drupal 6/7</span>
+          <span class="tag">.NET · C# · ASP.NET</span><span class="tag">SQL Server · Oracle DB</span>
+          <span class="tag">SOAP / REST</span><span class="tag">HTML5 · JavaScript · jQuery</span>
+          <span class="tag">OpenText · ConceptShare · BP Logix</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects" class="alt">
+  <p class="section-label">Products &amp; Projects</p>
+  <h2 class="section-heading reveal">Work that was <em>owned,</em><br>not just contributed to</h2>
+  <div class="narrative reveal" style="margin-top:2rem;">
+    <p>Several of these were products I architected from a blank file — not features on someone else's platform. Tekizma-Recon, Duplicate Defense, and the NLP comparison tool were internal Tekizma products where I owned the algorithm design, the database schema, the AWS integrations, and the delivery. The Patient Portal and Enterprise Oncology EHR work came later, at larger scale, as both technical lead and people manager. The thread connecting them: ownership.</p>
+    <cite>— On the nature of these projects</cite>
+  </div>
+
+  <div class="featured-grid reveal" style="margin-top:2rem;">
+    <div class="feat-card" onclick="openModal('recon')">
+      <div class="feat-num">Featured · 01</div>
+      <h3 class="feat-title">Tekizma-Recon</h3>
+      <p class="feat-domain">Healthcare · Insurance · Reconciliation Engine</p>
+      <p class="feat-desc">Flagship data-reconciliation product architected from scratch — core algorithm, Drools rules, AOP licensing, X12/835 healthcare parsers, AWS integrations, adaptive-learning dashboards. Built and led as product architect across multiple years.</p>
+      <div class="feat-highlights"><span class="feat-pill">Architect Appreciation Award</span><span class="feat-pill">HIPAA Compliant</span><span class="feat-pill">X12/835 Parsers</span><span class="feat-pill">Adaptive Learning</span></div>
+      <div class="feat-footer"><span>Tekizma · 2015–2021</span><span class="feat-cta">Read case study →</span></div>
+    </div>
+    <div class="feat-card" onclick="openModal('ai-agents')">
+      <div class="feat-num">Featured · 02</div>
+      <h3 class="feat-title">4 Production AI Agents at the oncology platform</h3>
+      <p class="feat-domain">GenAI · SDLC Automation · Oncology Platform</p>
+      <p class="feat-desc">Built and operationalised a GitHub Automation Agent, Copilot Studio Teams bot, LLM-assisted code reviewer, and Databricks CCDA pipeline — one shipped in under two weeks. Turned GenAI from experiment to team-wide baseline.</p>
+      <div class="feat-highlights"><span class="feat-pill">4 Production Agents</span><span class="feat-pill">&lt;2 Week Build</span><span class="feat-pill">Zero-Touch Automation</span><span class="feat-pill">Databricks Pipeline</span></div>
+      <div class="feat-footer"><span>Fortune 10 Oncology Company · 2024–25</span><span class="feat-cta">Read case study →</span></div>
+    </div>
+    <div class="feat-card" onclick="openModal('hix')">
+      <div class="feat-num">Featured · 03</div>
+      <h3 class="feat-title">State Health Insurance Marketplace</h3>
+      <p class="feat-domain">Healthcare · State Insurance Marketplace</p>
+      <p class="feat-desc">State-based health insurance marketplace serving large-scale eligibility renewals. Designed the multithreaded batch framework, EDI-834 trading-partner integrations, and led performance optimisation across three portal flavors.</p>
+      <div class="feat-highlights"><span class="feat-pill">Multithreaded Batch</span><span class="feat-pill">EDI-834</span><span class="feat-pill">Auto-Enrollment</span><span class="feat-pill">3 Portal Flavors</span></div>
+      <div class="feat-footer"><span>Fortune 10 health insurance company via Tekizma · 2017–2022</span><span class="feat-cta">Read case study →</span></div>
+    </div>
+    <div class="feat-card" onclick="openModal('nlp')">
+      <div class="feat-num">Featured · 04</div>
+      <h3 class="feat-title">Tekizma-NLP</h3>
+      <p class="feat-domain">AI / ML · Natural Language Processing</p>
+      <p class="feat-desc">Early AI research benchmarking seven NLP engines years before GenAI became mainstream. Led design, algorithm development, and delivery — lessons that directly informed the AI agent work at the oncology platform a decade later.</p>
+      <div class="feat-highlights"><span class="feat-pill">7 Engines Benchmarked</span><span class="feat-pill">Early ML Pipeline</span><span class="feat-pill">Chatbot Research</span></div>
+      <div class="feat-footer"><span>Tekizma India · 2017</span><span class="feat-cta">Read case study →</span></div>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--mono);font-size:10px;color:var(--char4);letter-spacing:.15em;text-transform:uppercase;margin-top:3rem;margin-bottom:1rem;" class="reveal">All Projects</h3>
+  <div class="all-projects-grid reveal">
+    <div class="proj-card" onclick="openModal('patient-portal')">
+      <div class="proj-num">01</div><h4 class="proj-name">the oncology platform Health Patient Portal</h4><p class="proj-domain">Oncology · Patient Engagement</p><p class="proj-role-period">Tech Lead / Delivery Lead · 2022–Present</p><p class="proj-desc">e-Registration, Health Records, e-Scheduling, e-Messaging, Impersonation modules. Kogito rule engine for task creation. On-time Go-Live delivery.</p><div class="tl-tags"><span class="tag">Kogito</span><span class="tag">OKTA</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span></div><p class="proj-award">On-time Go-Live delivery</p>
+    </div>
+    <div class="proj-card" onclick="openModal('oncology-ehr')">
+      <div class="proj-num">02</div><h4 class="proj-name">Enterprise Oncology EHR Platform</h4><p class="proj-domain">Oncology · EHR / EMR</p><p class="proj-role-period">Tech Lead / EM · 2022–Present</p><p class="proj-desc">OKTA auth upgrade, FullStory analytics, Smart API Portal load reduction via Nginx ConfigMap injection, User Management module design.</p><div class="tl-tags"><span class="tag">Kubernetes</span><span class="tag">Nginx</span><span class="tag">Spring Boot</span></div><p class="proj-award">100% OKTA rollout</p>
+    </div>
+    <div class="proj-card" onclick="openModal('patient-history')">
+      <div class="proj-num">03</div><h4 class="proj-name">Clinical History Module</h4><p class="proj-domain">Clinical · Micro-Frontend</p><p class="proj-role-period">Lead Developer / Architect · 2022–Present</p><p class="proj-desc">Micro-frontend for Social History and ePRO integrated into Enterprise Oncology EHR. MongoDB schema design. FHIR R4 + USCDI v3 compliant.</p><div class="tl-tags"><span class="tag">ReactJS</span><span class="tag">FHIR R4</span><span class="tag">MongoDB</span></div><p class="proj-award">USCDI v3 Compliant</p>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">04</div><h4 class="proj-name">Tekizma-Recon</h4><p class="proj-domain">Healthcare · Reconciliation</p><p class="proj-role-period">Product Architect · 2015–2021</p><p class="proj-desc">Core reconciliation algorithm, Drools rule engine, AOP licensing, X12/835 parsers, AWS Lambda/Cognito/S3/Lex, adaptive-learning dashboards.</p><div class="tl-tags"><span class="tag">Drools</span><span class="tag">AWS</span><span class="tag">AOP</span><span class="tag">X12</span></div><p class="proj-award">Architect Appreciation Award</p>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">05</div><h4 class="proj-name">Duplicate Defense</h4><p class="proj-domain">Healthcare · Data Quality</p><p class="proj-role-period">Senior Developer · Aug–Dec 2016</p><p class="proj-desc">Probabilistic record-matching engine finding duplicates within and across databases. Algorithm design, DB schema, reporting module, and Recon integration.</p><div class="tl-tags"><span class="tag">Java</span><span class="tag">Python</span><span class="tag">Google Charts</span></div>
+    </div>
+    <div class="proj-card" onclick="openModal('9zest')">
+      <div class="proj-num">06</div><h4 class="proj-name">9zest — Parkinson's / Stroke App</h4><p class="proj-domain">Healthcare · Mobile · Consulting</p><p class="proj-role-period">Senior Consultant · Feb–Aug 2017</p><p class="proj-desc">Subscription module for Parkinson's and stroke rehabilitation app — normalised framework across iOS, Android, and Web. Full delivery managed as engagement lead.</p><div class="tl-tags"><span class="tag">Ionic</span><span class="tag">Angular</span><span class="tag">iOS</span><span class="tag">Android</span></div><p class="proj-award">Consulting engagement delivery</p>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">07</div><h4 class="proj-name">State Health Insurance Marketplace — State Health Insurance Marketplace</h4><p class="proj-domain">Healthcare · State Marketplace</p><p class="proj-role-period">Lead / Senior Developer · 2017–2022</p><p class="proj-desc">Enrollment, EDI-834 integrations, multithreaded batch notices, IRS response handling, eligibility audit logs, performance optimisation across 3 portal types.</p><div class="tl-tags"><span class="tag">Spring Batch</span><span class="tag">EDI-834</span><span class="tag">Oracle</span></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">08</div><h4 class="proj-name">EOS Digitise</h4><p class="proj-domain">Life Sciences · Enterprise Content</p><p class="proj-role-period">Developer · 2014–2016 · Cognizant</p><p class="proj-desc">Independent developer at Cognizant on a top life-sciences client engagement — Java, .NET, SQL Server across OpenText, ConceptShare, BP Logix integrations.</p><div class="tl-tags"><span class="tag">Java</span><span class="tag">.NET</span><span class="tag">SOAP/REST</span><span class="tag">Drupal</span></div><p class="proj-award">"Pat on the Back" + "Energiser" Awards</p>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">09</div><h4 class="proj-name">Tekizma-NLP</h4><p class="proj-domain">AI / ML · NLP Research</p><p class="proj-role-period">Senior Developer · Jan–Mar 2017</p><p class="proj-desc">NLP comparison research tool benchmarking 7 engines on travel queries. Early ML/chatbot research predating the GenAI era by seven years.</p><div class="tl-tags"><span class="tag">Python</span><span class="tag">Amazon Lex</span><span class="tag">IBM Watson</span><span class="tag">Stanford NLP</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="section-label">Technical Skills</p>
+  <div class="skills-grid reveal">
+    <div class="skill-group"><p class="skill-group-title">Leadership</p><div class="skill-list">Engineering Management<br>Roadmap &amp; OKRs<br>Hiring &amp; Mentoring<br>Architecture Reviews<br>Major Incident Management<br>Executive Communication<br>SAFe / DevSecOps / SRE</div></div>
+    <div class="skill-group"><p class="skill-group-title">Cloud &amp; Platform</p><div class="skill-list">Azure (AKS, App Services, Redis)<br>AWS (EKS, Lambda, S3, IAM, Cognito)<br>Kubernetes · Helm · ArgoCD · Docker<br>GitLab · GitHub Actions · Build Piper<br>Nginx · Dynatrace · JProfiler<br>FinOps &amp; Cost Optimisation</div></div>
+    <div class="skill-group"><p class="skill-group-title">Architecture</p><div class="skill-list">Distributed Systems<br>Microservices &amp; Event-Driven<br>Service Mesh (Istio · mTLS)<br>API Design (REST / gRPC / GraphQL)<br>Rules Engines (Kogito · Drools)<br>Kafka / CDC / Debezium / XStream<br>Aspect-Oriented Programming</div></div>
+    <div class="skill-group"><p class="skill-group-title">Languages &amp; Backend</p><div class="skill-list">Java (7–21) · Python · C#<br>TypeScript / JavaScript<br>Spring Boot · J2EE · Hibernate<br>OAuth2 / OIDC / OKTA / SAML<br>PostgreSQL · Oracle · MongoDB<br>Redis · Databricks · Spring Batch</div></div>
+    <div class="skill-group"><p class="skill-group-title">AI / GenAI</p><div class="skill-list">GitHub Copilot · Copilot Studio<br>Power Automate · Claude · Cursor<br>MS Teams Bots · RAG Pipelines<br>Agentic SDLC Automation<br>Amazon Lex · IBM Watson<br>Stanford NLP · scikit-learn</div></div>
+    <div class="skill-group"><p class="skill-group-title">Healthcare &amp; Security</p><div class="skill-list">FHIR R4 · USCDI v3 · HL7 v2<br>EDI-834 / X12 / 835 Parsers<br>HIPAA Compliance<br>OWASP · Code Scanning · DAST/SAST<br>SBOM · Dependabot · CodeQL<br>CISO/BISO Partnership</div></div>
+  </div>
+</section>
+
+<section id="writing" class="alt">
+  <p class="section-label">Writing &amp; Case Studies</p>
+  <h2 class="section-heading reveal">Notes from<br>eleven years in <em>the field</em></h2>
+  <p class="reveal" style="font-size:15px;color:var(--char3);max-width:640px;margin:1.5rem 0 3rem;line-height:1.8;">Lessons on distributed systems, AI engineering, healthcare platforms, and leading teams — drawn from real work across a decade of healthcare and insurance platforms.</p>
+
+  <div class="articles-grid reveal">
+    <div class="article-card" onclick="openModal('art-cdc')"><div class="article-meta"><span class="atype">Article</span><span class="atime">12 min</span></div><h3 class="article-title">Why we chose CDC over dual-writes for Kafka streaming at scale</h3><p class="article-blurb">Dual-writes seem simple until they aren't. XStream vs LogMiner, Debezium connectors, and the consistency bugs we eliminated for good.</p><div class="article-tags"><span class="tag">Kafka</span><span class="tag">CDC</span><span class="tag">Debezium</span><span class="tag">Oracle XStream</span></div><div class="article-footer"><span class="article-cat">Distributed Systems</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-agents')"><div class="article-meta"><span class="atype case">Case Study</span><span class="atime">15 min</span></div><h3 class="article-title">Zero to 4 production AI agents: embedding GenAI across the SDLC</h3><p class="article-blurb">How we built and shipped four agents — one in under two weeks — and what it takes to make AI fluency a team-wide baseline.</p><div class="article-tags"><span class="tag">GenAI</span><span class="tag">Copilot Studio</span><span class="tag">Databricks</span></div><div class="article-footer"><span class="article-cat">AI Engineering</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-java')"><div class="article-meta"><span class="atype case">Case Study</span><span class="atime">10 min</span></div><h3 class="article-title">Java 17 to 21: modernising a legacy application without breaking production</h3><p class="article-blurb">Sticky session removal, Spring Boot upgrades, feature-flag gated rollouts, and zero rollbacks on a critical healthcare platform.</p><div class="article-tags"><span class="tag">Java 21</span><span class="tag">Spring Boot</span><span class="tag">Redis</span><span class="tag">Feature Flags</span></div><div class="article-footer"><span class="article-cat">Platform Modernisation</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-recon')"><div class="article-meta"><span class="atype case">Case Study</span><span class="atime">11 min</span></div><h3 class="article-title">Building a reconciliation engine from scratch: lessons from Tekizma-Recon</h3><p class="article-blurb">Designing a data-reconciliation product as a junior developer. Algorithm design, Drools rules, AOP, and what the Architect Award actually meant.</p><div class="article-tags"><span class="tag">Drools</span><span class="tag">AOP</span><span class="tag">Algorithm Design</span><span class="tag">AWS</span></div><div class="article-footer"><span class="article-cat">Product Engineering</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-hix')"><div class="article-meta"><span class="atype">Article</span><span class="atime">9 min</span></div><h3 class="article-title">Batch processing at insurance scale: designing the State Marketplace notices framework</h3><p class="article-blurb">Multithreaded batch jobs, failure recovery, EDI-834 parsing, and performance lessons from state insurance exchange systems that can't go down.</p><div class="article-tags"><span class="tag">Spring Batch</span><span class="tag">EDI-834</span><span class="tag">Multithreading</span><span class="tag">Oracle</span></div><div class="article-footer"><span class="article-cat">Backend Engineering</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-nlp')"><div class="article-meta"><span class="atype">Article</span><span class="atime">8 min</span></div><h3 class="article-title">Benchmarking 7 NLP engines in 2017: what it taught me about AI</h3><p class="article-blurb">Before LLMs, seven NLP engines, one comparison tool, and lessons that held up for a decade — including into the GenAI era.</p><div class="article-tags"><span class="tag">NLP</span><span class="tag">Amazon Lex</span><span class="tag">IBM Watson</span><span class="tag">Stanford NLP</span></div><div class="article-footer"><span class="article-cat">AI Research</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-leadership')"><div class="article-meta"><span class="atype">Article</span><span class="atime">8 min</span></div><h3 class="article-title">Leading 10+ engineers across 4 product lines without losing your mind</h3><p class="article-blurb">Design reviews, blameless post-mortems, 90%+ sprint adherence, and the unglamorous truth about scaling engineering teams.</p><div class="article-tags"><span class="tag">Engineering Management</span><span class="tag">SAFe</span><span class="tag">Hiring</span></div><div class="article-footer"><span class="article-cat">Leadership</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-security')"><div class="article-meta"><span class="atype case">Case Study</span><span class="atime">9 min</span></div><h3 class="article-title">Clearing 50%+ of the AppSec transformation: building a DevSecOps practice with AI</h3><p class="article-blurb">An AI-assisted remediation sprint that became a repeatable playbook. code scanning tooling, BISO partnership, and what made it actually work.</p><div class="article-tags"><span class="tag">DevSecOps</span><span class="tag">Code Scanning</span><span class="tag">DAST/SAST</span></div><div class="article-footer"><span class="article-cat">Security</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-zgc')"><div class="article-meta"><span class="atype case">Case Study</span><span class="atime">11 min</span></div><h3 class="article-title">When ZGC made things worse: a production GC regression and how we diagnosed it</h3><p class="article-blurb">We upgraded to ZGC + Generational GC after Java 21. Memory started saturating in production, pods showed long GC pauses, and Dynatrace pointed us at 6 GB of heap we hadn't expected. What the heap dump revealed, and why G1 was right all along.</p><div class="article-tags"><span class="tag">ZGC</span><span class="tag">G1GC</span><span class="tag">JVM Tuning</span><span class="tag">Dynatrace</span><span class="tag">Heap Analysis</span></div><div class="article-footer"><span class="article-cat">JVM / Production Engineering</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-ccda')"><div class="article-meta"><span class="atype case">Case Study</span><span class="atime">13 min</span></div><h3 class="article-title">2 weeks, zero handwritten code: building a CCDA extraction pipeline entirely with AI in Databricks</h3><p class="article-blurb">A new practice brought tens of thousands of clinical documents. A traditional service would have taken months. Using AI inside Databricks, we built the full extraction, validation, and EHR mapping pipeline in 2 weeks — and fundamentally changed how the team thinks about data engineering.</p><div class="article-tags"><span class="tag">Databricks</span><span class="tag">CCDA</span><span class="tag">GenAI</span><span class="tag">USCDI</span><span class="tag">Healthcare Interoperability</span></div><div class="article-footer"><span class="article-cat">AI Engineering · Data Pipelines</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-kafka')"><div class="article-meta"><span class="atype case">Case Study</span><span class="atime">14 min</span></div><h3 class="article-title">Operationalising Kafka: how we eliminated duplicate events, tamed lag, and built streaming we could actually trust</h3><p class="article-blurb">Getting Kafka running is easy. Getting it right in production — idempotency, offset discipline, schema evolution, DLQ patterns, lag SLOs — is a different problem entirely. Here's what it took on a national-scale healthcare platform.</p><div class="article-tags"><span class="tag">Kafka</span><span class="tag">Idempotency</span><span class="tag">DLQ</span><span class="tag">Schema Registry</span><span class="tag">Debezium</span><span class="tag">Confluent Cloud</span></div><div class="article-footer"><span class="article-cat">Distributed Systems · Event Streaming</span><span class="article-read">Read →</span></div></div>
+
+    <div class="article-card" onclick="openModal('art-mim')"><div class="article-meta"><span class="atype prev">Coming Soon</span><span class="atime">~7 min</span></div><h3 class="article-title">War rooms and blameless post-mortems: building incident culture</h3><p class="article-blurb">Lessons from MIM war rooms — rapid containment, RCA closure, and why blameless post-mortems are an investment, not an apology.</p><div class="article-tags"><span class="tag">MIM</span><span class="tag">SRE</span><span class="tag">Incident Response</span></div><div class="article-footer"><span class="article-cat">SRE / Leadership</span><span class="article-read">Preview →</span></div></div>
+  </div>
+</section>
+
+<section id="about">
+  <p class="section-label">About &amp; Education</p>
+  <div class="about-grid">
+    <div class="about-copy reveal">
+      <p>Engineering Manager and Software Architect with 11+ years building healthcare and insurance platforms — from writing Java algorithms on a Tekizma India team to leading Kubernetes-based oncology platforms at Fortune 10 oncology company.</p>
+      <p>The work has spanned product ownership, consulting delivery, technical leadership, and people management. The constants across all of it: a preference for architectural clarity over clever hacks, a belief that engineering culture compounds faster than technology choices, and a deep specialisation in healthcare interoperability.</p>
+      <p>Outside the code and org charts: I've benchmarked NLP engines, designed reconciliation algorithms, built a CCDA pipeline in under two weeks, and partnered with BISO on incident response. The range is intentional — the depth is in healthcare systems at scale.</p>
+    </div>
+    <div class="reveal">
+      <div class="edu-item"><h4 class="edu-degree">Master of Engineering — Microwave Engineering</h4><p class="edu-inst">Birla Institute of Technology, Mesra (BIT Mesra)</p><p class="edu-year">2012–2014 · GPA 9.2 / 10</p></div>
+      <div class="edu-item"><h4 class="edu-degree">B.Tech, Honours — Electronics &amp; Communication</h4><p class="edu-inst">Rajasthan Technical University, Kota</p><p class="edu-year">2008–2012</p></div>
+      <div class="edu-item"><h4 class="edu-degree">Certifications</h4><p class="edu-inst">Cloud · Kubernetes · Distributed Systems · GenAI · Engineering Leadership</p><p class="edu-year">Details on LinkedIn</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="alt">
+  <div class="contact-wrap reveal">
+    <h2 class="contact-head">Let's build<br><em>something great</em></h2>
+    <p class="contact-sub">Open to Engineering Manager and Staff Engineer roles. H1-B transfer ready. Washington, DC metro area.</p>
+    <div class="contact-links">
+      <a href="mailto:ash.mat.23@gmail.com" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>ash.mat.23@gmail.com</a>
+      <a href="https://linkedin.com/in/ashish-mathur-tech" target="_blank" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn ↗</a>
+    </div>
+    <div class="privacy-note">H1-B transfer ready · No gap · Phone available on request</div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Ashish Mathur</p>
+  <p>Washington, DC Metro · Engineering Manager · Software Architect</p>
+</footer>
+
+<div class="modal-overlay" id="modal" onclick="closeOnBackdrop(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const C={
+'recon':{k:'Case Study · Product Engineering · Tekizma · 2015–2021',t:'Tekizma-Recon: building a reconciliation engine from scratch',s:'Role: Product Architect & Lead Developer · Received Architect Appreciation Award',b:`<h3>The Problem Space</h3><p>Inter-system data discrepancies are one of the most expensive, least glamorous problems in enterprise software. In healthcare and insurance, a mismatch between what one system recorded and what another expects can delay claims, corrupt patient records, or trigger compliance failures. Tekizma-Recon was designed to systematically find, analyse, and resolve these discrepancies — across any pair of systems, at any scale.</p><p>I joined Tekizma India as a developer and ended up owning this product architecturally for the better part of six years.</p><h3>The Reconciliation Algorithm</h3><p>The core algorithm worked in four phases: <strong>Identification</strong> (surface discrepancies), <strong>Analysis</strong> (classify root cause), <strong>Resolution</strong> (propose or auto-apply corrections), and <strong>Correction</strong> (write back to source). The hardest part was Identification at scale — the solution was a keyed bucketing strategy that pre-grouped records by composite keys before pairwise comparison, reducing the comparison space from quadratic to near-linear.</p><h3>Drools Rule Engine for Root Cause Analysis</h3><p>Rather than hard-coding root-cause logic in Java, I used <strong>Drools</strong> as a rule engine for the Analysis phase. Domain experts could author and update rules without a full release cycle. This pattern followed me: a decade later, I used <strong>Kogito</strong> (Drools' modern successor) for clinical workflow automation in Enterprise Oncology EHR.</p><h3>AOP for Licensing and Cross-Cutting Concerns</h3><p>The Architect Appreciation Award was for integrating <strong>Aspect-Oriented Programming (AOP)</strong> for licensing enforcement and cross-cutting concerns — license checks, audit logging, and security boundaries expressed as aspects at the method level. Clean separation, zero repetition. The AOP discipline shapes how I think about separation of concerns in every architecture since.</p><blockquote>"The best design decision is often the one that makes the next ten decisions easier."</blockquote><h3>AWS Integration and HIPAA Compliance</h3><p>Later iterations integrated AWS Lambda for scheduled reconciliation jobs, Cognito for authentication, S3 for staging large data exports, and Lex for a conversational interface. HIPAA compliance required remote DB connectivity patterns keeping PHI off the application tier.</p><h3>X12/835 Healthcare Parsers</h3><p>Writing custom X12/835 parsers for healthcare payment remittance data was the start of a domain literacy that extended through EDI-834 at State Marketplace, then HL7 v2 and FHIR R4 at the oncology platform. Each format built on the last. Healthcare data format expertise didn't come from a course — it came from parsing specifications and debugging production data exchanges.</p>`},
+
+'ai-agents':{k:'Case Study · GenAI · Fortune 10 Oncology Company · 2024–2025',t:'Zero to 4 production AI agents: embedding GenAI across the SDLC',s:'Role: Engineering Manager & Architect · National oncology platform · 4 agents shipped, one in under 2 weeks',b:`<h3>Context</h3><p>The opportunity wasn't theoretical AI hype — it was: where are we spending engineer-hours on work that an agent could handle faster and more consistently? By end of 2024 we had four production AI agents shipped, embedded across all engineering teams. One was built and deployed in under two weeks.</p><div class="cg"><div class="cc"><span class="cn">4</span><span class="cl">Agents Shipped</span></div><div class="cc"><span class="cn">&lt;2wk</span><span class="cl">Fastest Build</span></div><div class="cc"><span class="cn">0</span><span class="cl">Manual Triggers</span></div></div><h3>The Four Agents</h3><p><strong>GitHub Automation Agent:</strong> Runs on scheduled triggers across hundreds of repos — security audit workflows, SBOM gating, and remediation PR generation. Engineers review and merge rather than investigate and write.</p><p><strong>Copilot Studio Teams Bot:</strong> RAG-based internal Q&A bot. Answers recurring developer questions from a curated knowledge base. The hard part was knowledge-base curation — we spent more time pruning outdated docs than building the bot.</p><p><strong>LLM-Assisted Code Review:</strong> Only flags high-confidence issues (null pointer risks, concurrency bugs, security anti-patterns). After six weeks, engineers were requesting it on PRs it hadn't been assigned to.</p><p><strong>Databricks CCDA Pipeline:</strong> CCDA clinical documents from the CDC stream, LLM-assisted extraction for irregular fields, normalised output to the interoperability layer. Built and shipped in under two weeks at an internal company Hackathon.</p><h3>What Worked</h3><ul><li>Narrow, bounded problems first</li><li>Scheduled triggers beat chat interfaces for compounding value</li><li>Constrained output schemas — diffs, JSON, structured comments over free-form text</li><li>Build eval harnesses from the third agent onwards</li></ul>`},
+
+'hix':{k:'Case Study · Healthcare · State Insurance Exchange · 2017–2022',t:'State Health Insurance Marketplace: batch processing and EDI at scale',s:'Role: Lead / Senior Developer · Fortune 10 health insurance company via Tekizma',b:`<h3>The Platform</h3><p>The marketplace is a state-based health insurance marketplace processing eligibility renewals for large numbers of residents, managing enrollments across individual, assister, and agent portals, and exchanging data with federal and state agencies in EDI formats. It can't go down.</p><h3>The Multithreaded Batch Framework</h3><p>The notices system generated renewal notices, Medicaid notices, RFI notices, and approval notices on schedule — with high throughput, full failure recovery, and replay capability. The framework used a thread-pool executor with configurable concurrency, a checkpointing mechanism to track batch progress at the record level, and a replay API that could re-execute any subset of records from a given batch ID. Design invariant: one bad record cannot corrupt a batch partition.</p><div class="cg"><div class="cc"><span class="cn">4</span><span class="cl">Notice Types</span></div><div class="cc"><span class="cn">3</span><span class="cl">Portal Flavors</span></div><div class="cc"><span class="cn">EDI</span><span class="cl">834 Integration</span></div></div><h3>EDI-834 and Trading Partner Integrations</h3><p>EDI-834 is the ANSI X12 transaction set for benefit enrollment. Writing a parser and transaction validator was specification-heavy work — the format has dozens of loop/segment variations depending on transaction type. We also implemented auto-enrollment flows and effectuation web services consuming 834 responses from trading partners.</p><h3>Performance Diagnosis</h3><p>The Individual Portal had performance issues under load. <strong>JProfiler</strong> identified N+1 query patterns and unindexed joins on the Oracle DB. <strong>Dynatrace</strong> confirmed the improvements held under production traffic. This combination — JProfiler for diagnosis, Dynatrace for validation — became standard in my toolkit.</p><h3>What Carried Forward</h3><ul><li>Healthcare data interchange literacy (EDI-834 → HL7 → FHIR): progressive accumulation</li><li>Batch framework design principles that informed the Databricks pipeline work at the oncology platform</li><li>Specification-first development: read the standard before touching code</li><li>Government-scale constraints: correctness and auditability over cleverness</li></ul>`},
+
+'nlp':{k:'Case Study · AI Research · Tekizma India · 2017',t:'Tekizma-NLP: benchmarking 7 engines before LLMs existed',s:'Role: Senior Developer / Lead · 7 NLP engines benchmarked',b:`<h3>2017, Seven NLP Engines, One Question</h3><p>In early 2017, NLP was a zoo of competing vendor APIs. Amazon Lex, IBM Watson, Microsoft LUIS, Google API.ai, Stanford NLP, WIT, and Open NLP all claimed to understand intent — but nobody had systematically compared them on the same inputs. I designed an abstraction layer routing the same query to all seven engines simultaneously, collected parsed intent and entity outputs, and built a side-by-side comparison with user rating to accumulate ground-truth data.</p><h3>What the Research Found</h3><ul><li><strong>Confidence scores aren't comparable across vendors.</strong> A 0.9 from one engine meant something very different from a 0.9 from another. Calibration matters.</li><li><strong>Entity extraction quality varied wildly on proper nouns.</strong> Engines trained on general corpora struggled with domain-specific vocabulary.</li><li><strong>Latency differences were enormous.</strong> Cloud APIs: 200–800ms. Stanford NLP local: slower but predictable.</li><li><strong>Hybrid approaches beat single-vendor solutions.</strong> Confidence-weighted voting across multiple engines outperformed any single engine on ambiguous inputs.</li></ul><blockquote>"The lesson wasn't which engine was best. It was that the comparison framework — the evaluation harness — was the valuable thing."</blockquote><h3>What It Predicted About the LLM Era</h3><p>Almost every finding from 2017 applies directly to LLM evaluation in 2024: eval harnesses matter more than model choice, confidence calibration is underrated, ensemble approaches outperform single models on hard inputs, and latency vs quality is still the central tension. When we built AI agents at the oncology platform, the instinct to build evals first came directly from this research.</p>`},
+
+'patient-portal':{k:'Project · Oncology · Fortune 10 Oncology Company · 2022–Present',t:'Oncology Patient Engagement Portal',s:'Role: Technology Lead / Delivery Lead',b:`<h3>Product Overview</h3><p>The oncology patient portal gives oncology patients online access to their personal health records, secure messaging with providers, appointment scheduling, and patient education resources. For a cancer patient navigating treatment, having this information accessible and current is genuinely meaningful.</p><h3>Modules Delivered</h3><ul><li><strong>e-Registration</strong> — patient onboarding with identity verification and consent management</li><li><strong>Health Records</strong> — structured access to clinical records from Enterprise Oncology EHR</li><li><strong>e-Scheduling</strong> — appointment booking integrated with practice calendars</li><li><strong>e-Messaging</strong> — HIPAA-compliant provider-patient messaging</li><li><strong>Impersonation</strong> — clinical staff impersonation for support workflows</li></ul><h3>Technical Highlights</h3><p>Authentication on <strong>OKTA</strong> using OIDC flows. Task creation via <strong>Kogito Rule Engine</strong> when patients send messages or request appointments — enabling configurable clinical workflows without code changes. Database: <strong>PostgreSQL</strong> for structured clinical data, <strong>MongoDB</strong> for unstructured patient-generated content. Ran on <strong>Kubernetes on Azure</strong> with Spring Boot microservices per module.</p><h3>Delivery</h3><p>Go-Live delivered within tight client and business commitments — a multi-team effort across product, engineering, QA, and clinical stakeholders.</p>`},
+
+'oncology-ehr':{k:'Project · Oncology EHR · Fortune 10 Oncology Company · 2022–Present',t:'Enterprise Oncology EHR Platform',s:'Role: Engineering Manager & Technical Lead',b:`<h3>Product Context</h3><p>The platform is an EHR designed specifically with oncologists, delivering point-of-care treatment decision support across devices used in clinical settings. It is one of the most widely used oncology EHRs across U.S. practices.</p><h3>Key Contributions</h3><p><strong>OKTA Authentication Upgrade:</strong> Designed and led migration of all authentication to OKTA across all practices — 100% rollout completed within committed timelines after the programme had previously stalled.</p><p><strong>FullStory Integration:</strong> Integrated FullStory analytics enabling user behaviour analysis via session segments, feeding directly into UX improvements and product prioritisation.</p><p><strong>Smart API Portal Load Reduction:</strong> Performance issues when launching Smart apps were resolved via Nginx script injection through Kubernetes ConfigMaps at artifact deployment time — a lightweight, infrastructure-native fix avoiding application-layer changes.</p><p><strong>Stonly Help Tooling:</strong> Added in-product help via Stonly, reducing support ticket volume for common workflows.</p><p><strong>User Management Module:</strong> Designed and built the core User Management module for practice administration workflows.</p>`},
+
+'patient-history':{k:'Project · Clinical · Fortune 10 Oncology Company · 2022–Present',t:'Clinical History Module — Micro-Frontend',s:'Role: Lead Developer / Architect · FHIR R4 + USCDI v3 Compliant',b:`<h3>Product Context</h3><p>Clinical History Module is a standalone application embedded within Enterprise Oncology EHR. It gives providers a structured view of patient-reported social history, NCCN details, and ePRO (Patient Reported Outcome) data — patient-entered responses surfaced directly in the clinical workflow.</p><h3>Micro-Frontend Architecture</h3><p>Designed as an independently deployable React application integrating into the Enterprise Oncology EHR shell at runtime. This allowed the Clinical History Module team to deploy independently without coordinating with the broader Enterprise Oncology EHR release cycle. Required careful management of shared dependencies, a well-defined integration contract, and CSS isolation to prevent style leakage between host and embedded module.</p><h3>FHIR R4 and USCDI v3</h3><p>Implemented FHIR R4-compliant REST endpoints for social history and ePRO data, meeting USCDI v3 data class requirements — delivered on schedule despite regulatory complexity, through close coordination with the compliance team.</p><h3>Database Design</h3><p>MongoDB schema designed to accommodate the flexible, evolving nature of patient-reported data — structured enough for query and reporting, flexible enough for new question types and data classes without schema migrations.</p>`},
+
+'9zest':{k:'Consulting Engagement · Healthcare Mobile · Feb–Aug 2017',t:'9zest: subscription module for a Parkinson\'s rehabilitation app',s:'Role: Senior Consultant · Cross-platform delivery (iOS, Android, Web)',b:`<h3>Client and Context</h3><p>9zest was a healthcare startup focused on rehabilitation technology for Parkinson's and stroke patients. I was engaged as Senior Consultant to own the design and delivery of a subscription-management module across iOS, Android, and Web.</p><h3>The Design Challenge</h3><p>Subscription management across iOS (App Store), Android (Play Store), and Web (direct payment) means three different subscription APIs, receipt validation mechanisms, trial period semantics, and refund policies. The key design decision was a <strong>normalised subscription framework</strong> on the backend abstracting all platform-specific behaviour behind a unified subscription model. Application code worked with concepts like "subscription status," "entitlement," and "renewal date" — platform specifics handled entirely in the integration layer.</p><h3>Technology</h3><p>Java/Spring MVC backend with PostgreSQL subscription store. <strong>Ionic Framework</strong> for cross-platform mobile (iOS and Android from a shared Angular/TypeScript codebase). Node.js for real-time subscription event webhooks.</p><h3>Delivery</h3><p>Managed overall development across all three platforms and delivered within the engagement timeline. A reminder that consulting delivery — owning scope, managing client expectations, and shipping — is a distinct skill from internal product work.</p>`},
+
+'art-cdc':{k:'Article · Distributed Systems',t:'Why we chose CDC over dual-writes for Kafka streaming at scale',s:'12 min read',b:`<h3>The Problem</h3><p>We needed near-real-time event streaming across PostgreSQL, Oracle, and MongoDB. The naïve answer is dual-writes: write to your database, then publish to Kafka. It's a pattern well-meaning teams reach for repeatedly. It's also a trap.</p><blockquote>"Dual-writes are simple right up until the moment they aren't — and that moment is always in production."</blockquote><h3>Why Dual-Writes Fail</h3><p>If the database write succeeds and the Kafka publish fails, downstream consumers have stale data. If the publish succeeds and the transaction rolls back, consumers have phantom events. No amount of retry logic makes this go away. What you get is slow consistency drift — reports that don't reconcile, analytics that quietly diverge from operational reality.</p><h3>The CDC Architecture</h3><p>Change Data Capture reads the database's own transaction log as the source of truth. We built on <strong>Confluent Cloud Kafka + Debezium</strong> with database-specific connectors: Debezium <code>pgoutput</code> for PostgreSQL, MongoDB oplog connector, and Oracle XStream for Oracle.</p><h3>XStream vs LogMiner</h3><p>For Oracle, Debezium supports two mechanisms: LogMiner (free, polling-based) and XStream (Oracle's native push-based streaming API). We tested LogMiner under production-representative write load — latency drifted from milliseconds to seconds, with multi-minute stalls during heavy redo log activity. XStream delivered sub-second latency consistently. It requires a separate license. For a platform where downstream clinical workflows depend on fresh data, the math worked.</p><div class="cg"><div class="cc"><span class="cn">&lt;1s</span><span class="cl">XStream Latency</span></div><div class="cc"><span class="cn">10–60s</span><span class="cl">LogMiner Under Load</span></div><div class="cc"><span class="cn">3 DBs</span><span class="cl">PostgreSQL+Oracle+Mongo</span></div></div><h3>Lessons</h3><ul><li><strong>Read the log, don't write twice.</strong> CDC is architecturally correct for event streaming from operational stores.</li><li><strong>Test under realistic write load.</strong> LogMiner looks fine in dev.</li><li><strong>Latency requirements drive licensing decisions.</strong> Understand the cost of stale data before ruling out paid solutions.</li></ul>`},
+
+'art-agents':{k:'Case Study · GenAI',t:'Zero to 4 production AI agents: embedding GenAI across the SDLC',s:'15 min read',b:`<h3>Context</h3><p>The question was: where are we spending engineer-hours on work that an agent could handle faster and more consistently? By end of 2024 we had four production AI agents shipped, one in under two weeks.</p><div class="cg"><div class="cc"><span class="cn">4</span><span class="cl">Agents Shipped</span></div><div class="cc"><span class="cn">&lt;2wk</span><span class="cl">Fastest Build</span></div><div class="cc"><span class="cn">0</span><span class="cl">Manual Triggers</span></div></div><h3>GitHub Automation Agent</h3><p>Scheduled triggers across hundreds of repos — security audit workflows, SBOM gating, remediation PR generation. Engineers review and merge rather than investigate and write. Cognitive overhead per finding dropped dramatically.</p><h3>Copilot Studio Teams Bot</h3><p>RAG-based internal Q&A bot in MS Teams. Answers recurring developer questions from a curated knowledge base. Lesson: knowledge-base curation takes longer than bot construction. Garbage in, garbage out is real with RAG systems.</p><h3>LLM-Assisted Code Review</h3><p>Only flags high-confidence findings: null pointer risks, concurrency bugs, security anti-patterns. Style nits go to the linter. After six weeks, engineers were requesting it on unassigned PRs.</p><h3>Databricks CCDA Pipeline</h3><p>CCDA clinical documents from the CDC stream, LLM-assisted extraction for irregular fields, normalised output to the interoperability layer. Built and shipped in under two weeks at an internal company Hackathon.</p><h3>What Worked</h3><ul><li>Narrow, bounded problems first</li><li>Scheduled triggers beat chat interfaces for compounding value</li><li>Constrained output schemas — diffs, JSON, structured comments</li><li>Build eval harnesses from day one on agent three onwards</li></ul>`},
+
+'art-java':{k:'Case Study · Platform Modernisation',t:'Java 17 to 21: modernising a legacy application without breaking production',s:'10 min read',b:`<h3>The Constraint That Shaped Everything</h3><p>Near-zero appetite for production rollbacks. On a clinical platform, a bad deploy could disrupt patient care. Every step had to be feature-flag gated, observable from day one, and reversible.</p><h3>Phase 1: Removing Sticky Sessions</h3><p>Sticky sessions were the biggest impediment to horizontal scale and clean rolling deployments. We moved session state to <strong>Azure Cache for Redis</strong>, with a feature flag controlling the cutover per request. Rolled out to 1% of traffic, watched Dynatrace p99 dashboards, expanded incrementally. Four weeks. Zero rollbacks.</p><div class="cg"><div class="cc"><span class="cn">0</span><span class="cl">Rollbacks</span></div><div class="cc"><span class="cn">4 wks</span><span class="cl">Ramp Duration</span></div><div class="cc"><span class="cn">Java 21</span><span class="cl">17 → 21</span></div></div><h3>Java 21: The Final Step</h3><p>The upgrade from 17 to 21 was the culmination of a phased Java LTS migration. Key changes on this hop: virtual thread considerations in concurrent code, sealed classes adoption for domain models, and pattern matching for <code>instanceof</code> sweeps across the codebase. Maven SBOM gating caught transitive dependency surprises in CI before they reached production.</p><h3>Spring Boot and WildFly</h3><p>Alongside the Java upgrade, we completed Spring Boot and WildFly/Hibernate version upgrades. Each was feature-flag gated — any workload could be rolled back to the previous version independently. Dynatrace p99 dashboards monitored each rollout increment in real time.</p><h3>The Meta-Lesson</h3><p>Modernisation at this scale is a risk-management project, not a technology project. The Java version is the easy part. Sequencing changes so each is independently safe, observable, and reversible — that is the hard part. Get the operational discipline right and the version bumps become uneventful.</p>`},
+
+'art-recon':{k:'Case Study · Product Engineering',t:'Building a reconciliation engine from scratch: lessons from Tekizma-Recon',s:'11 min read · Received Architect Appreciation Award',b:`<h3>Starting as a Developer, Ending as an Architect</h3><p>I joined Tekizma India as a developer and owned this product architecturally for six years. Designing a core algorithm, then watching it process real client data at scale, then being responsible for it when it fails — that is a different kind of learning than any course or tutorial.</p><h3>The Algorithm Problem</h3><p>Naive pairwise comparison of large record sets is O(n²) and unusable at enterprise scale. The solution was a keyed bucketing strategy: pre-group records by composite keys before pairwise comparison. This reduced the comparison space from quadratic to near-linear for most real-world data distributions. Designing this as a junior developer — on paper, then in code, then against real client data — was the most formative engineering experience of my early career.</p><blockquote>"The best design decision is often the one that makes the next ten decisions easier."</blockquote><h3>Drools, AOP, and the Architect Award</h3><p><strong>Drools Rule Engine</strong> for root-cause analysis meant domain experts could update rules without a release cycle. <strong>Aspect-Oriented Programming</strong> for licensing and cross-cutting concerns — license checks, audit logging, security boundaries expressed as aspects rather than scattered throughout business logic. The Architect Appreciation Award was for the AOP integration specifically. The pattern: separate concerns aggressively, let the business logic stay clean.</p><h3>Healthcare Domain Depth Through Format Literacy</h3><p>Writing X12/835 parsers from specification was the start of a domain literacy extending through EDI-834 at State Marketplace, then HL7 v2 and FHIR R4 at the oncology platform. Each format built on the last. The expertise didn't come from a course — it came from parsing specifications and debugging production data exchanges over years.</p>`},
+
+'art-hix':{k:'Article · Backend Engineering',t:'Batch processing at insurance scale: designing the State Marketplace notices framework',s:'9 min read',b:`<h3>The Problem with Batch Jobs</h3><p>Most batch jobs fail in one of two ways: fail the entire batch on any error (losing all progress), or silently skip failures (hiding problems until an auditor asks why thousands of renewal notices weren't sent). Neither is acceptable when the output is a regulatory notice determining someone's healthcare coverage.</p><h3>The Framework Design</h3><p>The notices framework used a thread-pool executor with configurable concurrency, record-level checkpointing, and a replay API that could re-execute any subset of records from a given batch ID without side effects. Key design invariants:</p><ul><li>Every record has a deterministic final state (processed, skipped with reason, or failed with retry)</li><li>Any batch can be replayed from checkpoint without duplicating already-sent notices</li><li>Concurrency is configurable at runtime without redeployment</li><li>One bad record cannot corrupt a batch partition</li></ul><div class="cg"><div class="cc"><span class="cn">4</span><span class="cl">Notice Types</span></div><div class="cc"><span class="cn">EDI</span><span class="cl">834 + X12</span></div><div class="cc"><span class="cn">3</span><span class="cl">Portal Flavors</span></div></div><h3>EDI-834: Reading the Specification</h3><p>The EDI-834 specification runs to hundreds of pages of loop/segment definitions with dozens of variations per transaction type. The discipline: read the specification before touching code, build a test corpus from sample transactions, validate against real trading-partner data. This specification-first approach became standard — FHIR R4 work on the oncology platform used exactly the same methodology.</p><h3>Performance and Observability</h3><p><strong>JProfiler</strong> identified N+1 query patterns and unindexed joins. <strong>Dynatrace</strong> confirmed improvements held under production traffic. Diagnose with JProfiler, validate with Dynatrace — a combination that became a standard part of my performance toolkit and is still the core observability stack at the oncology platform today.</p>`},
+
+'art-nlp':{k:'Article · AI Research · 2017',t:'Benchmarking 7 NLP engines in 2017: what it taught me about AI',s:'8 min read',b:`<h3>2017, Before the LLM Era</h3><p>I designed a tool routing the same query to seven NLP engines simultaneously — Amazon Lex, IBM Watson, Microsoft LUIS, Google API.ai, Stanford NLP, WIT, and Open NLP — and comparing parsed intent and entity outputs side-by-side with a user rating interface to accumulate ground-truth data over time.</p><h3>What the Research Found</h3><ul><li><strong>Confidence scores aren't comparable across vendors.</strong> A 0.9 from one engine meant something very different from 0.9 from another.</li><li><strong>Entity extraction varies wildly on domain terms.</strong> General-purpose models need domain grounding to be reliable in specialised contexts.</li><li><strong>Latency differences were enormous.</strong> Cloud APIs: 200–800ms. Predictability sometimes matters more than average latency.</li><li><strong>Hybrid approaches beat single-vendor solutions.</strong> Confidence-weighted voting across multiple engines outperformed any single engine on ambiguous inputs.</li></ul><blockquote>"The lesson wasn't which engine was best. It was that the evaluation harness was the valuable thing."</blockquote><h3>What It Predicted About the LLM Era</h3><p>Almost every finding from 2017 applies directly to LLM evaluation in 2024: eval harnesses matter more than model choice, confidence calibration is underrated, ensemble approaches outperform single models on hard inputs. When we built AI agents at the oncology platform, the instinct to build evals first came directly from this research. The NLP work in 2017 was a seven-year head start on thinking about AI system evaluation.</p>`},
+
+'art-leadership':{k:'Article · Engineering Leadership',t:'Leading 10+ engineers across 4 product lines without losing your mind',s:'8 min read',b:`<h3>The Shape of the Problem</h3><p>Engineering management at scale is not just doing your IC job for other people. It's a different job, and the transition is uncomfortable. I lead 10+ engineers within Platform & Shared Services at the oncology platform — owning 30+ microservices, partnering with multiple product teams, on critical-path schedules across four concurrent product lines.</p><h3>1. Establish bar through process, not heroics</h3><p>Design reviews for any non-trivial change. On-call rotation with documented runbooks. Blameless post-mortems for every incident over a threshold. These became org-wide standards because we held the line on doing them every time — not just when convenient. Personal vigilance scales to about four engineers. After that, you're a bottleneck.</p><h3>2. Hire for trajectory, not current skill</h3><p>Engineers who get visibly excited when they don't know something are the strongest hiring signal I've found. Almost universally, they outperform stronger candidates whose curiosity seemed depleted.</p><blockquote>"You don't grow engineers by telling them the answer. You grow them by asking the question that makes the answer obvious to them."</blockquote><h3>3. Hit your sprints, defend your team's depth</h3><p>We hit 90%+ sprint commitment adherence on 2-week SAFe cycles. That's not heroics — it's being aggressive about what we commit to. At the same time: if 100% of team time is feature work, you're borrowing against the future. Defend dedicated time for modernisation, security, and platform investment.</p><h3>4. Be the interpreter, both ways</h3><p>Your team needs context from leadership they don't have. Leadership needs ground truth they can't get from dashboards. Your job is to be the high-bandwidth channel in both directions — translating strategy into implications, and engineering reality into language that gets resources allocated.</p>`},
+
+'art-security':{k:'Case Study · DevSecOps',t:'Clearing 50%+ of the AppSec transformation: building a DevSecOps practice with AI',s:'9 min read',b:`<h3>The Starting State</h3><p>Three product lines. static analysis, dependency scanning, and DAST across dozens of microservices. Hundreds of GitHub repos. An AppSec backlog growing faster than the team could close findings. The risk was real; the work was genuinely tedious. That combination is why security backlogs pile up everywhere.</p><h3>The Hypothesis</h3><p>Most findings fall into a small number of patterns: outdated dependencies with known CVE fixes, predictable injection patterns, hardcoded credentials. An LLM with the right grounding can triage these in seconds and propose fixes in PR-ready form.</p><h3>The Sprint</h3><p>One week. Dedicated engineers. An AI agent integrated with code scanning tooling that pulled findings by severity, classified each into pattern categories, generated upgrade PRs for dependency CVEs, proposed code fixes with diff annotations, and generated suppression entries with documented justification for false positives. Engineers reviewed and approved — they didn't investigate and write. Per-finding cognitive overhead dropped dramatically.</p><div class="cg"><div class="cc"><span class="cn">50%+</span><span class="cl">Backlog Cleared</span></div><div class="cc"><span class="cn">1 wk</span><span class="cl">Sprint Duration</span></div><div class="cc"><span class="cn">3</span><span class="cl">Product Lines</span></div></div><h3>What Made It Work</h3><ul><li><strong>BISO partnership from day one</strong> — a joint effort with shared metrics, not engineering sneaking past compliance</li><li><strong>AI proposed, humans approved</strong> — every PR through human review; AI compressed work, didn't replace judgment</li><li><strong>Repeatable playbook</strong> — the sprint structure has been adopted across teams and compounds with each run</li></ul>`},
+
+'art-zgc':{k:'Case Study · JVM / Production Engineering · Post Java 21 Upgrade',t:'When ZGC made things worse: a production GC regression and how we diagnosed it',s:'11 min read · A real post-upgrade incident, root-cause analysis, and reversal',b:`
+<h3>The Setup</h3>
+<p>Following the Java 17 → 21 upgrade, we decided to push further into the new JVM capabilities. Java 21 shipped with production-ready <strong>ZGC (Z Garbage Collector)</strong> and the newer <strong>Generational ZGC</strong> mode — both promising sub-millisecond GC pauses and better throughput for large heaps. On paper, it was the right move for a Kubernetes-based oncology platform with latency-sensitive clinical workflows. We enabled both via JVM arguments and rolled out to production.</p>
+<p>What followed was a textbook example of why "new and better" needs to be earned in production, not assumed.</p>
+
+<h3>The Symptoms</h3>
+<p>Within days of the rollout, Dynatrace dashboards started showing anomalies across several pods:</p>
+<ul>
+  <li><strong>Memory saturation</strong> — heap utilisation climbing toward ceiling and not recovering cleanly between request bursts</li>
+  <li><strong>Abnormally long GC pauses</strong> on specific pods — outliers that were 10–50× longer than the rest of the fleet</li>
+  <li><strong>Increased p99 latency</strong> on the affected pods, correlating exactly with the GC events</li>
+  <li>The pattern was not uniform — some pods were fine, others consistently degraded</li>
+</ul>
+<p>The non-uniformity was the first clue. If it were a pure GC algorithm mismatch, it would show fleet-wide. Something about the specific workload hitting those pods was different.</p>
+
+<h3>The Heap Dump</h3>
+<p>We triggered heap dumps from the worst-performing pods at peak saturation and analysed them. What we found was a 6.12 GB total heap utilisation with a striking composition:</p>
+
+<div class="cg">
+  <div class="cc"><span class="cn">6.1</span><span class="cl">GB Total Heap</span></div>
+  <div class="cc"><span class="cn">1.25</span><span class="cl">GB byte[] arrays</span></div>
+  <div class="cc"><span class="cn">1.15</span><span class="cl">GB HashMaps</span></div>
+  <div class="cc"><span class="cn">370</span><span class="cl">MB GWT AutoBean</span></div>
+</div>
+
+<ul>
+  <li><strong>byte[]</strong> — 1.25 GB across 15.8 million arrays, the single largest consumer. This volume of byte array allocation is characteristic of serialisation-heavy workloads or large binary payloads being held in memory longer than expected.</li>
+  <li><strong>HashMap / ConcurrentHashMap</strong> — ~1.15 GB combined. Excessive map usage at this scale typically indicates either unbounded caches, accumulation of request-scoped maps that aren't being released, or data structures that are growing without a ceiling.</li>
+  <li><strong>GWT AutoBean / WeakMapping</strong> — ~370 MB. This was the most significant diagnostic signal. <strong>GWT (Google Web Toolkit)</strong> AutoBean framework objects and WeakMapping entries at this volume pointed strongly to a server-side proxy leak — GWT's AutoBean infrastructure was creating proxy objects that weren't being cleaned up. The WeakMapping entries in particular suggested that weak references weren't being reclaimed as expected.</li>
+  <li><strong>LocationDTO</strong> — 630,000 instances. <strong>Practice</strong> — 172,000 instances. Domain object accumulation at this scale, for objects representing clinical locations and practices, pointed to either an in-memory cache without expiry or a session-scoped collection growing unboundedly across requests.</li>
+  <li><strong>StackTraceElements</strong> — 149 MB of retained stack traces. This volume is characteristic of exception-heavy code paths where exceptions are being created (and therefore capturing stack traces) at high frequency — often in error-handling logic on hot paths.</li>
+</ul>
+
+<h3>Why ZGC Made It Worse</h3>
+<p>Here is the crucial insight — and the reason this was a GC algorithm problem, not just a memory leak problem.</p>
+<p>ZGC is designed for <strong>large heaps with many small, short-lived objects</strong>. Its concurrent marking and compaction achieve low pause times precisely because it can process most of the heap while the application is still running. <strong>But ZGC struggles with very large individual objects</strong> — specifically, objects so large that the concurrent GC cycle cannot complete its work before the next allocation wave arrives.</p>
+<p>The GWT AutoBean proxy objects and the accumulated LocationDTO / Practice domain objects were not small. They were large, deeply referenced object graphs. ZGC's concurrent collector was spending enormous time tracing these graphs — and on the pods with the heaviest workloads, it couldn't complete a full collection cycle before memory pressure forced another one. The result was cascading long pauses as ZGC tried (and partially failed) to reclaim the large object graphs.</p>
+<blockquote>"ZGC's low-pause promise assumes your object graph is workable. Ours wasn't — and the GC was honest about it."</blockquote>
+<p><strong>G1GC (Garbage First)</strong>, by contrast, is a <strong>Stop-The-World (STW) collector</strong> — it pauses all application threads during collection. For most modern applications this sounds worse. But G1's region-based collection is specifically tuned for heterogeneous heap contents: it identifies the regions with the most garbage, collects those first, and deals gracefully with large objects via dedicated Humongous regions. For our heap profile — a mix of high-volume small arrays and a smaller number of very large object graphs — G1's strategy was actually the better fit.</p>
+
+<h3>Local Reproduction</h3>
+<p>Before committing to a rollback, we reproduced the issue locally. Using a heap dump replay and a load test that simulated the specific clinical workflows hitting the degraded pods, we confirmed:</p>
+<ul>
+  <li>ZGC + Generational: memory saturation within ~20 minutes of sustained load; long GC pauses on every cycle</li>
+  <li>G1GC with the same workload: stable heap utilisation, consistent STW pauses in the expected 50–150ms range, no saturation</li>
+</ul>
+<p>The reproduction gave us the confidence to act — not just on gut feel or prod observations, but on a controlled comparison.</p>
+
+<h3>The Resolution</h3>
+<p>We removed the ZGC and Generational GC JVM flags and reverted to G1GC. The rollout was feature-flag gated pod-by-pod, with Dynatrace monitoring p99 latency and heap utilisation at each increment. Within two hours of the full rollout:</p>
+<ul>
+  <li>Memory saturation resolved — heap utilisation dropped and recovery between request bursts normalised</li>
+  <li>Long GC pauses disappeared from Dynatrace</li>
+  <li>p99 latency on affected pods returned to fleet baseline</li>
+</ul>
+
+<h3>What We Didn't Do — and Why</h3>
+<p>The heap dump told us more than just "switch back to G1." It told us about the GWT AutoBean leak, the domain object accumulation, and the exception-heavy patterns. These are real issues worth addressing — they were present before ZGC and will cause problems again as the application scales. We documented them as follow-on work items rather than bundling them into the immediate resolution. The lesson: a production incident is not the moment to fix everything. Fix what's causing the immediate pain, document the rest clearly, and return to it when you're not under fire.</p>
+
+<h3>Key Takeaways</h3>
+<ul>
+  <li><strong>GC algorithm selection is workload-specific.</strong> ZGC's marketing is correct — for the right heap profile. Our heap profile wasn't it.</li>
+  <li><strong>New JVM features need production validation, not just benchmarks.</strong> Synthetic benchmarks don't reproduce the specific object graph that clinical workflows produce at scale.</li>
+  <li><strong>Heap dumps are the ground truth.</strong> Dynatrace showed us that something was wrong; the heap dump told us exactly what. Both instruments were necessary.</li>
+  <li><strong>Local reproduction before reversal.</strong> Reproducing the issue locally gave us a controlled comparison and the confidence to act decisively without guessing.</li>
+  <li><strong>Rollback is not defeat.</strong> Sometimes the right call is to fall back, document what you learned, and return to the improvement when you can address the underlying conditions first.</li>
+</ul>
+`},
+
+'art-ccda':{k:'Case Study · AI Engineering · Clinical Data Pipelines · Healthcare Interoperability',t:'2 weeks, zero handwritten code: building a CCDA extraction pipeline entirely with AI in Databricks',s:'13 min read · From months-long service development to a 2-week AI-built pipeline in production',b:`
+<h3>The Problem That Prompted It</h3>
+<p>A new oncology practice was being onboarded onto the EHR platform. They were bringing tens of thousands of CCD (Consolidated Clinical Document Architecture) documents — structured XML clinical records containing patient history, medications, problems, allergies, procedures, and results. The business expectation was that all of this historical data would be imported into the EHR so clinicians could have a complete patient record from day one.</p>
+<p>The traditional answer was a new Java microservice: requirements, design, development, QA, staging rollout, production rollout. Based on the complexity of CCDA parsing, validation rule implementation, and EHR table mapping, the honest estimate was <strong>several months</strong> end-to-end. For a practice waiting to go live, that timeline was a problem.</p>
+<p>The question I asked was: what if we didn't build a service at all?</p>
+
+<h3>Why Databricks, Why AI, Why Now</h3>
+<p>We already had Databricks running as part of our analytics and interoperability infrastructure. It had access to the clinical document store, connectivity to the EHR database layer, and a compute environment capable of processing large document volumes. What it didn't have was a CCDA extraction pipeline.</p>
+<p>The traditional approach would be to write one — Python or Scala notebooks, manually authored parsing logic, hand-coded validation rules, tested incrementally against sample documents. That still takes weeks of careful engineering even in a notebook environment.</p>
+<p>The different approach: use AI as the primary implementer throughout, not as an autocomplete assistant. Every component of the pipeline — the XML parsing strategy, the extraction logic, the validation rule implementations, the EHR table mapping — was designed and implemented through AI-assisted development inside Databricks. <strong>No code was written manually.</strong></p>
+
+<div class="cg">
+  <div class="cc"><span class="cn">2</span><span class="cl">Weeks to Production</span></div>
+  <div class="cc"><span class="cn">Months</span><span class="cl">Traditional Timeline</span></div>
+  <div class="cc"><span class="cn">0</span><span class="cl">Handwritten Code</span></div>
+  <div class="cc"><span class="cn">10s×K</span><span class="cl">CCDs Processed</span></div>
+</div>
+
+<h3>What CCDA Actually Requires</h3>
+<p>Before describing what we built, it's worth being precise about the problem. CCDA is not a simple format. It is a HL7 standard built on CDA R2, using templated XML with specific OID-identified sections and entries. A CCDA document can contain:</p>
+<ul>
+  <li><strong>Allergies and intolerances</strong> — with coded values, severity, reaction, and status</li>
+  <li><strong>Medications</strong> — with dosage, route, frequency, coded drug identifiers (RxNorm), and administration timing</li>
+  <li><strong>Problems / Conditions</strong> — ICD-10 coded, with onset dates and status</li>
+  <li><strong>Procedures</strong> — CPT coded, with dates and performers</li>
+  <li><strong>Vital signs</strong> — LOINC coded, with values and units</li>
+  <li><strong>Lab results</strong> — with reference ranges, units, and interpretation flags</li>
+  <li><strong>Social history, family history, immunisations, care plans</strong></li>
+</ul>
+<p>Each section follows a template with specific XPath navigation paths. The extraction is not just "parse the XML" — it's "navigate to the correct template, extract the coded value, resolve it against the appropriate coding system, and handle the dozen ways a given field might be absent or null-flavoured in the CDA standard."</p>
+<p>On top of that, the extracted data needed to pass through four distinct validation layers before touching the EHR tables.</p>
+
+<h3>The Pipeline Architecture</h3>
+<p>The pipeline was built as a sequence of Databricks notebooks, each owning a discrete stage. AI designed and implemented each stage; I directed the design decisions, reviewed the output, and validated against real document samples throughout.</p>
+
+<p><strong>Stage 1 — Document Ingestion and Preprocessing</strong></p>
+<p>Read CCD XML files from Azure Storage, validate basic structural integrity (well-formed XML, correct CDA namespace, document type identification), and emit a stream of parsed document objects. The AI implemented the XML parsing strategy using Python's <code>lxml</code> with XPath expressions specific to the CDA R2 schema — handling namespace prefixes, null flavors, and malformed documents with graceful error isolation so one bad document doesn't block the batch.</p>
+
+<p><strong>Stage 2 — Clinical Data Extraction</strong></p>
+<p>Navigate each CDA section template by OID, extract coded clinical data with its surrounding context (status, dates, performers, units), and resolve codes against RxNorm, ICD-10, CPT, LOINC, and SNOMED CT. The AI authored the template-specific extraction logic for each clinical section — dozens of XPath navigations and value resolutions that would have been tedious, error-prone manual work. Output: a structured clinical record per document, ready for validation.</p>
+
+<p><strong>Stage 3 — Four-Layer Validation</strong></p>
+<p>This was the most complex stage. Each extracted record had to pass through four validation layers sequentially:</p>
+<ul>
+  <li><strong>Table/Column Mapping Validation</strong> — does the extracted data map to valid EHR target columns? Are required fields present? Do data types match the target schema? The AI implemented this as schema-driven validation against the EHR table definitions.</li>
+  <li><strong>Business Rules Validation</strong> — application-specific rules: a patient cannot have a medication start date after the document date; a problem without an ICD-10 code requires a text description; specific practice-level rules around data completeness. The AI encoded these as a rules engine within the notebook.</li>
+  <li><strong>Data Consistency Rules</strong> — cross-record consistency checks: does a referenced provider exist in the system? Does the patient identifier match across all sections of the same document? Are dates internally consistent? AI-implemented as a join-based validation pass across the extracted record set.</li>
+  <li><strong>USCDI and CCDA Standard Rules</strong> — compliance validation against USCDI v3 data class requirements and CCDA conformance rules: required sections present, required coded fields populated, terminology bindings respected. The AI implemented these directly from the USCDI and CCDA conformance specification text.</li>
+</ul>
+<p>Records failing validation were written to a quarantine dataset with structured error annotations — not silently dropped. Each error carried the document ID, section, field, rule violated, and extracted value, enabling manual review and reprocessing.</p>
+
+<p><strong>Stage 4 — EHR Table Mapping and Load</strong></p>
+<p>Map validated records to the EHR target tables — normalising extracted clinical data into the application's internal data model, resolving foreign keys, and writing to the database layer. The AI authored the mapping transformations from the CCDA canonical form to the EHR schema, a many-to-many translation that required understanding both the clinical data model and the EHR's internal representation.</p>
+
+<h3>The Role of AI Throughout</h3>
+<p>It's worth being precise about what "no handwritten code" actually means in practice — because it's not a magic trick, it's a methodology.</p>
+<p>Every function, every XPath expression, every validation rule, every mapping transformation was generated by AI from a specification I provided: the CCDA template OIDs, the validation rule descriptions, the EHR target schema, the business rules written in plain English. My role was to:</p>
+<ul>
+  <li>Describe each component's requirements precisely enough that the AI could implement it correctly</li>
+  <li>Review every output against real CCD document samples</li>
+  <li>Identify gaps and failures and feed them back as corrective prompts</li>
+  <li>Make architectural decisions (pipeline topology, error handling strategy, quarantine design) that the AI executed</li>
+</ul>
+<blockquote>"AI as implementer, engineer as architect. The judgment, the specification, the review — all human. The code — all AI. That's the actual division of labour."</blockquote>
+<p>This is meaningfully different from using Copilot as an autocomplete. The AI held the implementation context across an entire pipeline, not just a function. That's what made the timeline compression possible.</p>
+
+<h3>Impact: Dev and QA Effort Reduction</h3>
+<p>The most significant outcome wasn't just the 2-week delivery — it was what it implied for every subsequent CCDA import engagement.</p>
+<p>The traditional CCDA import service required:</p>
+<ul>
+  <li>A developer to write and unit-test the parsing, validation, and mapping logic</li>
+  <li>A QA engineer to design test cases covering each clinical section and validation rule</li>
+  <li>A staging environment rollout with integration testing</li>
+  <li>A production rollout with monitoring and rollback planning</li>
+</ul>
+<p>The Databricks pipeline approach requires:</p>
+<ul>
+  <li>An engineer to specify requirements and review AI output</li>
+  <li>Validation against document samples (QA effort concentrated on specification correctness, not code correctness)</li>
+  <li>A Databricks job run — no service deployment, no rollout pipeline, no rollback plan needed</li>
+</ul>
+<p>For the practice that prompted this work, the import completed within the 2-week window. For future practices, the pipeline is parameterisable — new practice-specific business rules can be added as configuration, not code. The QA effort moves from "test the implementation" to "validate the specification and the output data" — a fundamentally lighter-weight activity.</p>
+<p>The pipeline is now part of the standard practice onboarding toolkit. What was a months-long project is a weeks-long effort, and shrinking.</p>
+
+<h3>What This Changes About How We Think</h3>
+<p>The deeper lesson isn't about CCDA or Databricks. It's about the class of problems where the bottleneck is <em>specification</em>, not <em>implementation</em>. When the hard part is knowing what to build — understanding the clinical data model, the validation rules, the target schema — and the implementation is a mechanical translation of that knowledge into code, AI can own the implementation entirely. The human effort concentrates on the part that requires genuine domain expertise.</p>
+<p>Healthcare data engineering is full of exactly this class of problem: well-specified standards (CCDA, FHIR, HL7, USCDI), complex but mechanical transformations, multi-layer validation against known rule sets. The CCDA pipeline was a proof of concept for a broader shift in how we approach clinical data work.</p>
+`},
+
+'art-kafka':{k:'Case Study · Distributed Systems · Event Streaming · Production Engineering',t:'Operationalising Kafka: how we eliminated duplicate events, tamed lag, and built streaming we could actually trust',s:'14 min read · From rebalance chaos and silent duplicates to production-grade reliability with SLOs',b:`
+<h3>The Seductive Simplicity of "Just Add Kafka"</h3>
+<p>Kafka has a low barrier to entry. You spin up a topic, wire up a producer, write a consumer, and data flows. In a dev environment, it feels solved. The first deployment to production usually feels fine too. It's the weeks and months after that reveal what you didn't account for — and on a healthcare platform processing clinical events across PostgreSQL, Oracle, and MongoDB sources, the cost of getting it wrong wasn't just operational inconvenience. It was data correctness in patient records.</p>
+<p>This is a case study in what it actually takes to operationalise Kafka at scale — not the getting-started part, but the reliability engineering that makes streaming a platform you can build on top of rather than a source of incidents you manage around.</p>
+
+<h3>The Problems We Encountered</h3>
+
+<p><strong>1. Duplicate Events from Consumer Rebalancing</strong></p>
+<p>Kafka's consumer group rebalance is a normal, expected event — it happens when a consumer joins or leaves a group, when a partition is reassigned, or when a heartbeat times out. The protocol guarantees at-least-once delivery, which means during a rebalance, any message that was fetched but not yet committed can be redelivered to a different consumer. In a stateless microservice that writes to a database, this is a silent data-correctness bug: the same clinical event gets processed twice, producing duplicate records or double-applied state changes.</p>
+<p>We were seeing this in the Debezium CDC pipeline — the Oracle XStream connector was emitting change events that, under rebalance conditions, were being consumed twice by the downstream processors. The first symptom wasn't obvious duplication; it was subtle data drift — records with unexpected update timestamps, aggregates that didn't add up, downstream reconciliation failures that were hard to trace back to a root cause.</p>
+
+<p><strong>2. Out-of-Order Event Processing</strong></p>
+<p>Kafka guarantees ordering within a partition, not across partitions. When our producers were partitioned by entity type rather than entity ID, updates to the same clinical record could land on different partitions and be consumed by different consumer instances — arriving out of order at the downstream service. A <code>DELETED</code> event arriving before the <code>CREATED</code> event it logically followed was particularly damaging: the consumer would discard the delete (no record to delete), then create the record, leaving a ghost entity that should not exist.</p>
+
+<p><strong>3. Consumer Lag and No SLOs</strong></p>
+<p>Consumer lag — the gap between the latest offset produced and the latest offset committed by the consumer — is the heartbeat metric of a Kafka pipeline. We had lag; we did not have SLOs. Without a defined acceptable lag threshold and alerting on breach, lag accumulated silently. Clinical events from source systems were arriving at downstream processors with delays that, in some cases, stretched to tens of minutes. For workflows that depended on near-real-time data — scheduling, eligibility checks, clinical decision support — this was operationally unacceptable.</p>
+
+<p><strong>4. Schema Evolution Breaking Consumers</strong></p>
+<p>As the source systems evolved — new columns in Oracle, new fields in the domain model — the Debezium-emitted schemas changed. Consumers that were tightly coupled to a specific schema version broke silently: they either dropped unrecognised fields (losing data) or threw deserialisation exceptions (stopping processing entirely). We had no schema governance between producers and consumers, which meant every source-side change was a potential consumer outage.</p>
+
+<div class="cg">
+  <div class="cc"><span class="cn">4</span><span class="cl">Failure Modes<br>Identified</span></div>
+  <div class="cc"><span class="cn">0</span><span class="cl">Duplicate Rate<br>Post-Fix</span></div>
+  <div class="cc"><span class="cn">~0</span><span class="cl">DLQ Volume<br>at Steady State</span></div>
+  <div class="cc"><span class="cn">SLO</span><span class="cl">Lag Thresholds<br>with Alerting</span></div>
+</div>
+
+<h3>What We Built: The Reliability Stack</h3>
+
+<p><strong>Idempotent Processing — the Foundation</strong></p>
+<p>The single highest-leverage change was making every consumer idempotent. An idempotent consumer produces the same result whether it processes a given event once or ten times. This sounds simple but requires discipline at every write operation.</p>
+<p>Our implementation used <strong>event fingerprinting</strong>: each Debezium CDC event carries a unique combination of the source table, the operation type (INSERT/UPDATE/DELETE), the primary key, and the source timestamp. We derived a deterministic event ID from this combination and stored it in a processing log table on first consumption. On any subsequent delivery of the same event — from a rebalance, a retry, or a replay — the consumer checks the log, finds the event ID already present, and short-circuits without reprocessing.</p>
+<p>For UPDATE events, we applied <strong>optimistic locking at the write layer</strong>: the consumer only applies the update if the record's current version in the target database matches the version in the event. A stale event — one that arrives after a newer update has already been applied — is discarded cleanly rather than overwriting more recent state.</p>
+<p>The combined result: duplicate events became a non-event operationally. The consumer handled them correctly regardless of how many times they arrived.</p>
+
+<p><strong>Partition Strategy — Ordering by Entity ID</strong></p>
+<p>We changed the producer partitioning strategy from entity-type-based to entity-ID-based. All events for a given patient, practice, or clinical record now land on the same partition, guaranteeing that the consumer processes them in the order they were produced. This eliminated the out-of-order delivery problem at the source rather than requiring complex ordering logic at the consumer.</p>
+<p>For cases where cross-entity ordering was required — a practice update that needed to be processed before the patient events that referenced it — we implemented a <strong>sequencing header</strong> on the Kafka message that consumers could use to detect and buffer out-of-sequence events until their predecessors arrived.</p>
+
+<p><strong>Dead Letter Queue (DLQ) Pattern</strong></p>
+<p>Before DLQ, a poison message — one that caused a consumer exception — would stall the entire partition until it was manually cleared. One bad event could block all subsequent events behind it indefinitely. This was the most operationally damaging failure mode we had.</p>
+<p>We implemented a DLQ pattern where any message that fails processing after a configurable retry count (with exponential backoff) is routed to a dedicated DLQ topic rather than blocking the main consumer. The DLQ message carries the original payload plus enriched metadata: the consumer that failed it, the exception type and stack trace, the retry count, and the timestamp of each attempt.</p>
+<p>A separate DLQ processor runs on a slow poll interval, providing a manual review interface and a reprocessing capability. Operators can inspect DLQ messages, fix the underlying issue (a schema mismatch, a missing reference record, a transient external dependency failure), and replay the message through the main consumer pipeline — or permanently discard it with an audit record. DLQ volume became a key operational metric: a spike in DLQ messages is an early warning signal of a systemic problem in the pipeline.</p>
+
+<p><strong>Schema Registry and Version Strategy</strong></p>
+<p>We onboarded <strong>Confluent Schema Registry</strong> with Avro schemas for all Kafka topics. Every producer registers its schema; every consumer declares compatibility requirements. Schema evolution follows a strict <strong>backward-compatible-by-default</strong> rule: new fields must have defaults; existing fields cannot be removed or have their types changed without a versioned migration.</p>
+<p>The registry enforces this at publish time — a producer attempting to register an incompatible schema gets a hard failure before any events are emitted. This moved schema breakage from a runtime consumer failure (discovered in production) to a build/deploy failure (discovered before deployment).</p>
+<p>For cases requiring breaking schema changes — field removals, type changes — we implemented a <strong>two-phase migration</strong>: publish both the old and new fields simultaneously for a transition period, migrate all consumers to read the new field, then remove the old field in a subsequent release once all consumers are confirmed updated.</p>
+
+<p><strong>Lag Monitoring with SLOs</strong></p>
+<p>We defined explicit consumer lag SLOs for each topic based on the downstream workflow's latency tolerance:</p>
+<ul>
+  <li><strong>Clinical events</strong> (patient records, orders, results) — maximum acceptable lag: 60 seconds</li>
+  <li><strong>Practice/administrative events</strong> — maximum acceptable lag: 5 minutes</li>
+  <li><strong>Analytics/reporting events</strong> — maximum acceptable lag: 15 minutes</li>
+</ul>
+<p>Dynatrace monitored consumer group lag via JMX metrics exported from the Kafka clients, with alerting on SLO breach and an escalation path to on-call. We also tracked <strong>lag velocity</strong> — not just the current lag value but whether it was growing or shrinking — as an early indicator of a consumer that was falling behind faster than it could recover.</p>
+<p>Runbooks for each alert were written before the alerting was enabled: what the alert means, what to check first, what the resolution steps are, and when to escalate. An alert without a runbook is just noise.</p>
+
+<h3>The Before / After</h3>
+<p>Before this work, streaming reliability was maintained through vigilance — periodic manual checks, reactive incident response, and a general wariness about the pipelines. After:</p>
+<ul>
+  <li><strong>Duplicate rate</strong> — eliminated. Idempotent consumers mean rebalance events are operationally invisible.</li>
+  <li><strong>Out-of-order processing</strong> — eliminated for same-entity events; handled deterministically for cross-entity sequences.</li>
+  <li><strong>Consumer lag</strong> — SLO-bound and monitored. Breaches trigger alerts within minutes; runbooks drive resolution rather than improvisation.</li>
+  <li><strong>DLQ volume</strong> — near zero at steady state, used as an early-warning signal when it spikes rather than a graveyard of unprocessed messages.</li>
+  <li><strong>Schema breakage</strong> — caught at deploy time, not at runtime. Schema Registry compatibility enforcement means consumers never encounter an unexpected schema in production.</li>
+  <li><strong>Downstream operational burden</strong> — measurably reduced. The reconciliation and manual correction work that had been a regular activity for the data team dropped substantially after idempotency and ordering were fixed.</li>
+</ul>
+
+<h3>The Real Lesson: Streaming is an Operational Discipline, Not a Technology Choice</h3>
+<p>Every team that reaches for Kafka makes the same implicit assumption: that the technology will handle reliability. It won't. Kafka is a durable, ordered, distributed log — what it does with remarkable reliability. What it does not do is make your consumers idempotent, partition your events sensibly, govern your schemas, or define what "acceptable lag" means for your business.</p>
+<blockquote>"Streaming is easy to start, genuinely hard to operationalise. The gap between a working Kafka demo and a production-grade streaming platform is idempotency, observability, and schema discipline — and most teams only discover this after their first production incident."</blockquote>
+<p>The reliability stack we built — idempotent consumers, entity-ID partitioning, DLQ patterns, Schema Registry, lag SLOs with runbooks — is not a set of clever optimisations. It is the table stakes for treating an event stream as a first-class data contract rather than a best-effort fire-and-forget mechanism. On a healthcare platform where the downstream of a Kafka consumer is a clinical record, the distinction is not academic.</p>
+`},
+
+'art-mim':{k:'Coming Soon · SRE / Leadership',t:'War rooms and blameless post-mortems: building incident culture',s:'Preview · ~7 min read',b:`<h3>What This Article Will Cover</h3><p>Drawing from years of leading MIM war rooms, this piece will cover the actual mechanics of incident response — not the polished SRE-book version, but the messy human reality of running a war room while pagers go off and stakeholders demand updates.</p><h3>Planned Topics</h3><ul><li><strong>The first ten minutes</strong> — what to do when you're paged and you don't yet know what's broken</li><li><strong>Containment vs root cause</strong> — when to stabilise first and investigate later (almost always)</li><li><strong>Communication discipline</strong> — keeping stakeholders informed without disrupting the people fixing things</li><li><strong>Blameless post-mortems that aren't toothless</strong> — extracting real lessons without pointing fingers</li><li><strong>RCA closure</strong> — the unglamorous follow-through that determines whether you actually learn</li></ul><h3>The Thesis</h3><p>Incident response is a learnable skill, not a personality trait. Teams that handle production crises well aren't more talented — they've practiced more in lower-stakes situations and built habits that hold up under pressure.</p><p style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11px;color:var(--char4);">Notify me when published: <a href="mailto:ash.mat.23@gmail.com" style="color:var(--copper);">ash.mat.23@gmail.com</a></p>`}
+};
+
+function openModal(id){
+  const c=C[id];if(!c)return;
+  document.getElementById('modalBody').innerHTML=`<div class="modal-kicker">${c.k}</div><h2 class="modal-title">${c.t}</h2><p class="modal-sub">${c.s}</p><div class="modal-body">${c.b}</div>`;
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('modalBox').scrollTop=0;
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+function closeOnBackdrop(e){if(e.target.id==='modal')closeModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── Scroll-spy nav ──────────────────────────────────────────────────────────
+const sections=document.querySelectorAll('section[id],header[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+const spyObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(a=>a.classList.remove('active'));
+      const active=document.querySelector('.nav-links a[href="#'+e.target.id+'"]');
+      if(active)active.classList.add('active');
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+sections.forEach(s=>spyObs.observe(s));
+
+// ── Count-up animation for hero stats ──────────────────────────────────────
+function countUp(el,target,suffix,duration=1200){
+  const isDecimal=target%1!==0;
+  const start=performance.now();
+  const step=ts=>{
+    const p=Math.min((ts-start)/duration,1);
+    const ease=1-Math.pow(1-p,3);
+    const val=isDecimal?(ease*target).toFixed(1):(Math.round(ease*target));
+    el.textContent=val+suffix;
+    if(p<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const statObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const num=e.target.querySelector('.hero-stat-num');
+    if(!num)return;
+    const text=num.textContent.trim();
+    const match=text.match(/^([\d.]+)(.*)$/);
+    if(!match)return;
+    countUp(num,parseFloat(match[1]),match[2],1400);
+    statObs.unobserve(e.target);
+  });
+},{threshold:.5});
+document.querySelectorAll('.hero-stat').forEach(s=>statObs.observe(s));
+</script>
+</body>
+</html>
